@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ヌービア百科事典 - Tellus世界</title>
+<style>
+:root {
+  --wiki-bg: #f8f9fa;
+  --wiki-text: #202122;
+  --wiki-border: #a2a9b1;
+  --wiki-link: #0645ad;
+  --wiki-sidebar: #ffffff;
+  --wiki-content: #ffffff;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans JP", sans-serif;
+  margin: 0;
+  background: var(--wiki-bg);
+  color: var(--wiki-text);
+  line-height: 1.6;
+  font-size: 16px;
+}
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: var(--wiki-sidebar);
+  border-right: 1px solid var(--wiki-border);
+  overflow-y: auto;
+  padding: 16px 12px;
+  z-index: 100;
+}
+#sidebar h2 {
+  margin: 0 0 12px 0;
+  font-size: 1.1em;
+  border-bottom: 1px solid var(--wiki-border);
+  padding-bottom: 6px;
+}
+#sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#sidebar li {
+  margin: 4px 0;
+}
+#sidebar a {
+  color: var(--wiki-link);
+  text-decoration: none;
+  display: block;
+  padding: 4px 6px;
+  border-radius: 3px;
+  font-size: 0.92em;
+}
+#sidebar a:hover {
+  background: #eaecf0;
+  text-decoration: underline;
+}
+#sidebar .nav-btn {
+  background: none;
+  border: none;
+  color: var(--wiki-link);
+  cursor: pointer;
+  font: inherit;
+  padding: 4px 6px;
+  text-align: left;
+  width: 100%;
+  border-radius: 3px;
+}
+#sidebar .nav-btn:hover {
+  background: #eaecf0;
+  text-decoration: underline;
+}
+#sidebar .nav-btn.active {
+  background: #eaf3ff;
+  font-weight: 600;
+}
+#content {
+  margin-left: 260px;
+  padding: 24px 32px 60px;
+  max-width: 1100px;
+  background: var(--wiki-content);
+  min-height: 100vh;
+}
+h1 {
+  font-size: 1.8em;
+  border-bottom: 1px solid var(--wiki-border);
+  padding-bottom: 0.3em;
+  margin-top: 0;
+  font-weight: 400;
+}
+h2 {
+  font-size: 1.4em;
+  border-bottom: 1px solid #eaecf0;
+  padding-bottom: 0.2em;
+  margin-top: 1.5em;
+}
+h3 { font-size: 1.15em; margin-top: 1.2em; }
+p { margin: 0.8em 0; }
+.section { display: none; }
+.section.active { display: block; }
+.full-view .section { display: block; margin-bottom: 3em; border-bottom: 2px dashed #eaecf0; padding-bottom: 2em; }
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 16px auto;
+  border: 1px solid #c8ccd1;
+  border-radius: 2px;
+  background: #f0f0f0;
+}
+.img-note {
+  font-size: 0.85em;
+  color: #54595d;
+  text-align: center;
+  margin-top: -8px;
+  margin-bottom: 16px;
+  font-style: italic;
+}
+blockquote {
+  border-left: 3px solid #eaecf0;
+  margin: 1em 0;
+  padding: 0.5em 1em;
+  background: #f8f9fa;
+  color: #54595d;
+}
+.note, .disclaimer {
+  background: #fef6e7;
+  border-left: 4px solid #fc3;
+  padding: 8px 12px;
+  margin: 12px 0;
+  font-size: 0.9em;
+}
+.faction-card {
+  border: 1px solid var(--wiki-border);
+  padding: 16px;
+  margin: 12px 0;
+  border-radius: 4px;
+  background: #fafbfc;
+}
+.east-card {
+  border-left: 5px solid #3b82f6;
+  background: #f0f7ff;
+}
+.west-card {
+  border-left: 5px solid #ef4444;
+  background: #fef2f2;
+}
+.east-section {
+  background: #f0f7ff !important;
+  border-left: 4px solid #3b82f6;
+}
+.west-section {
+  background: #fef2f2 !important;
+  border-left: 4px solid #ef4444;
+}
+@media (max-width: 900px) {
+  #sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid var(--wiki-border); }
+  #content { margin-left: 0; padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div id="sidebar">
+  <h2>目次</h2>
+  <ul>
+    <li><button class="nav-btn active" onclick="showSection('home')">ホーム</button></li>
+    <li><button class="nav-btn" onclick="showSection('stratocracy')">ヌービアの軍事政権（東）</button></li>
+    <li><button class="nav-btn" onclick="showSection('east-army')">東ヌービア陸軍</button></li>
+    <li><button class="nav-btn" onclick="showSection('federal')">ヌービア連邦共和国（西）</button></li>
+    <li><button class="nav-btn" onclick="showSection('federal-military')">連邦防衛軍</button></li>
+    <li><button class="nav-btn" onclick="showSection('new-people')">新しい人々（ヌーブ）</button></li>
+    <li><button class="nav-btn" onclick="showSection('unification-war')">ヌービア統一戦争</button></li>
+    <li><button class="nav-btn" onclick="showSection('assault')">独立への攻撃</button></li>
+    <li><button class="nav-btn" onclick="showSection('verna')">ヴェルナと先住民の歴史</button></li>
+    <li><button class="nav-btn" onclick="showSection('bloxia')">ブロクシア連邦</button></li>
+    <li><button class="nav-btn" onclick="showSection('decade-war')">十年戦争とヌーブ兵</button></li>
+    <li><button class="nav-btn" onclick="showSection('nuclear')">核施設</button></li>
+    <li><button class="nav-btn" onclick="showSection('specialists')">特殊部隊</button></li>
+    <li><button class="nav-btn" onclick="showSection('redwick')">レッドウィック・アワー</button></li>
+    <li><button class="nav-btn" onclick="showSection('korblox')">北の人々（コーブロックス）</button></li>
+    <li><button class="nav-btn" onclick="showSection('northern-front')">北部戦線</button></li>
+    <li><button class="nav-btn" onclick="showSection('arms')">自由世界への自由な武器</button></li>
+    <li><button class="nav-btn" onclick="showSection('worlds')">三つの世界</button></li>
+    <li><button class="nav-btn" onclick="showSection('modern')">現代のテルス</button></li>
+    <li><button class="nav-btn" onclick="showSection('land-noobia')">ヌービアの地</button></li>
+    <li><button class="nav-btn" onclick="showSection('uprising')">ヌービア蜂起</button></li>
+    <li style="margin-top:12px; border-top:1px solid #eaecf0; padding-top:8px;">
+      <button class="nav-btn" onclick="showFull()" style="font-weight:600; color:#d33;">📖 全体一気見</button>
+    </li>
+    <li>
+      <button class="nav-btn" onclick="showSection('factions')">⚔️ 派閥紹介</button>
+    </li>
+    <li style="margin-top:8px; border-top:1px solid #eaecf0; padding-top:8px;">
+      <button class="nav-btn" onclick="showSection('teams')">🛡️ 公式派閥</button>
+    </li>
+    <li>
+      <button class="nav-btn" onclick="showSection('nmp')">・NMP（軍事警察）</button>
+    </li>
+    <li>
+      <button class="nav-btn" onclick="showSection('nes')">・NES（エンジニアリング）</button>
+    </li>
+    <li>
+      <button class="nav-btn" onclick="showSection('anro')">・ANRO（原子炉運用）</button>
+    </li>
+    <li style="margin-top:4px;">
+      <button class="nav-btn" onclick="showSection('2nia')">・2NIA（情報機関）</button>
+    </li>
+    <li>
+      <button class="nav-btn" onclick="showSection('csp')">・CSP / 8NEC</button>
+    </li>
+    <li>
+      <button class="nav-btn" onclick="showSection('nsp')">・NSP（海軍）</button>
+    </li>
+    <li>
+      <button class="nav-btn" onclick="showSection('fedgov')">・Federal Government</button>
+    </li>
+    <li style="margin-top:8px; border-top:1px solid #eaecf0; padding-top:8px;">
+      <button class="nav-btn" onclick="showSection('regular-teams')">🎮 通常チーム</button>
+    </li>
+  </ul>
+</div>
+
+<div id="content">
+
+<!-- HOME -->
+<div id="home" class="section active">
+  <h1>ヌービア百科事典</h1>
+  <p>テルス世界におけるヌービア島を中心とした設定資料集です。Wikipedia風のシンプルな構成で、各ストーリーを個別に閲覧するか、全体を一気に読むことができます。</p>
+  <p><strong>主要勢力：</strong></p>
+  <ul>
+    <li><strong>ヌービアの軍事政権</strong>（東ヌービア） — 軍が全権を握る独裁国家</li>
+    <li><strong>ヌービア連邦共和国</strong>（西ヌービア） — ブロクシア支援の民主共和国</li>
+    <li>ブロクシア連邦、コーブロックス、ヒンターランド諸国など</li>
+  </ul>
+  <p>左の目次から項目を選んでください。画像はDiscord CDNから読み込みます（表示されない場合はリンクを直接開いてください）。</p>
+</div>
+
+<!-- STRATOCRACY -->
+<div id="stratocracy" class="section">
+  <h1>ヌービアの軍事政権</h1>
+  <p>ヌービアの軍事政権（別名：東ヌービア）は、ヌービア共和国の後継政府である。大陸の東部に位置し、陸地面積の68%を占めている。1952年に武装勢力がヌービア共和国の大統領ハーヴェイ・「クラシック」・ブライトを倒して成立した。政府は欠陥のある民主共和国から、軍が絶対権力を握る独裁政権へと移行した。</p>
+  <p>軍事政権では、民間人と軍の境界線が曖昧でほとんど存在せず、軍が防衛から郵便、教育に至るまで、生活のほぼすべての側面を運営している。東ヌービアの市民は世界の他の地域から完全に隔離され、国境の外で何が起こっているかをほとんど知らず、反対意見を残酷に抑圧し、ほとんどの資源を攻撃的な戦争、または軍事政権自身が呼ぶ「解放・再統一戦争」に充てる体制の下で暮らしている。</p>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1440811832561504387/image.png?ex=6af6d455&is=6af582d5&hm=b786f118fc86ad3716636fa4d1ed46f72e460f9acc002e55d7e943d7596696d5&" alt="軍事政権関連画像">
+</div>
+
+<!-- EAST ARMY -->
+<div id="east-army" class="section">
+  <h1>東ヌービア陸軍</h1>
+  <p><strong>地上軍（Ground Service）</strong>は、軍事政権政府を構成する4つの機関の1つであり、陸上の武装勢力を代表する。東ヌービアの陸軍は<strong>3</strong>個師団で構成される。各師団はおよそ15万〜20万人の兵士を擁し、完全に自給自足可能で、外部の支援なしに地上侵攻を遂行できる。</p>
+  <p>3個師団のうち、<strong>第3師団</strong>は「旗手師団」として際立っており、最も近代的な装備と最も熱狂的に忠誠な兵士を擁する。一方、第1・第2師団は共和時代の古い装備に大きく依存している。</p>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1440811904053542963/image.png?ex=6af6d466&is=6af582e6&hm=6ed2b2d6bab6f4622fc6ca830ccc2d4ae86aa0a975e2ee1d45db10c01befc455&" alt="陸軍画像1">
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1440811904296554588/image-25.png?ex=6af6d466&is=6af582e6&hm=3dd30cec1fa5dfac4f79b01514598641af60bf889b85fe6b4c37762f84369441&" alt="陸軍画像2">
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1440811904489623723/image.png?ex=6af6d467&is=6af582e7&hm=ac4cf70a7d856c1f045f416a1d645fd7066ff1410a4f9dbd9cd37808c485a27c&" alt="陸軍画像3">
+</div>
+
+<!-- FEDERAL -->
+<div id="federal" class="section">
+  <h1>ヌービア連邦共和国</h1>
+  <p>ヌービア連邦共和国（別名：西ヌービア）は、ヌービア大陸の西部に位置し、全体の32%を占めている。1952年にブロクシア連邦が衛星国家として設立したもので、ヌービアの資源の一部を掌握し、軍事政権に対する反対勢力を維持するために作られた。</p>
+  <p>連邦共和国は若くやや脆弱な民主主義国家で、自由市場経済を採用し、多数の私企業と複数の政党が権力を争い、異なる社会集団の利益を代表している。東の隣人とは異なり、西ヌービア人は他国に対してずっと開放的で、民主主義と自由市場の概念を圧倒的に支持している。</p>
+</div>
+
+<!-- FEDERAL MILITARY -->
+<div id="federal-military" class="section">
+  <h1>ヌービア連邦防衛軍</h1>
+  <p>第二次ブロクシア侵攻の後半から始まった西ヌービア軍（略称：WNA、WNAF、WNMなど）は、常に<strong>防衛的</strong>な姿勢を保ってきた。これはその教義、技術などから明らかである。</p>
+  <p>連邦地上防衛軍は機械化歩兵、偵察、砲兵、装甲師団で組織され、特殊部隊と統合ヘリコプター部隊で補完される。東ヌービア地上軍に比べて資金は少ないが、この欠点はブロクシアからの大量の軍事援助と助言によってほぼ相殺されている。65万人の人員と装備で国を防衛することが使命であり、装備の多くは外国製・国産・植民地時代のものが混在している。</p>
+  <p>海上自衛隊は沿岸の防衛を担当し、しばしば沿岸の外、さらには東ヌービア水域内での交戦を行う。沿岸都市の包囲を防ぎ、ブロクシア装備の港への輸送を守ることが優先事項である。</p>
+  <p>連邦防空軍は200機以上の航空機と限定的なブロクシア供与の戦略的地対空ミサイルサイトで空域を守る。植民地時代、ブロクシア供給、少数の国産機を混在して運用している。</p>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1440812042205270247/image.png?ex=6af6d487&is=6af58307&hm=3249e2ad417c3b9f4e59019e83dd305fecb2a073a79464dc99b48b32c08441a3&" alt="連邦防衛軍画像">
+</div>
+
+<!-- NEW PEOPLE -->
+<div id="new-people" class="section">
+  <h1>新しい人々（ヌーブ）</h1>
+  <p>「ヌーブ」という言葉は、現在ヌービア島の先住民を指すのに使われるが、元々は彼ら自身の言葉ではない。19世紀のブロクシア人植民地化者が島の住民を「新しい人々」または「新しい存在」（newbs）と呼んだことに由来する。</p>
+  <p>1800年代にブロクシア人に発見され、最初の接触直後に植民地化された。植民地時代に島には豊富な天然資源があることがわかり、急速に工業ネットワークが発展した。ヌービアは連邦に組み込まれ、本土とほぼ同じ扱いを受けた。</p>
+  <p>しかしヌーブ自身の統合は遅く困難だった。植民地化以前、彼らはブロクシアがもたらした発展のレベルを見たことがなかった。多くの概念や科学が彼らにとって完全に異質であり、ほとんど助けなしに新しい世界で生きることを学ばなければならなかった。</p>
+  <p>それでもヌービアは植民地であり、指導者や搾取者とは異なる人々の土地だった。ブロクシア人に育てられた世代は、自分たちの扱いを「資源をポケットに持つ愚かで素朴な新しい存在」として我慢し続けることを望まなくなり、独立ヌービアの考えが形成され始めた。</p>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1440812114590830592/image.png?ex=6af6d499&is=6af58319&hm=69b9bfef501785abb924fd3f5e47f33f9b3f5d57d18ec25bb367370344dedd0c&" alt="新しい人々画像">
+</div>
+
+<!-- UNIFICATION WAR -->
+<div id="unification-war" class="section">
+  <h1>ヌービア統一戦争</h1>
+  <p>軍事政権では「再統一戦争」、他国では「ヌービア戦争」として知られるこの戦争は、東部のヌービア軍事政権と西部のヌービア連邦共和国の間の進行中の戦争で、1961年3月14日に始まった。</p>
+  <p>戦争は軍事政権の大規模軍事演習「West-61」の終了数日後に始まった。東と西を隔てる山脈を越える通路を守る西ヌービアの要塞に対する複数の航空・砲撃爆撃から始まった。東は制空権を得られなかったが、全力で初期の西部防衛を突破した。</p>
+  <p>戦争の第一段階は1962年まで続き、東部勢力の超攻撃的な攻勢が特徴だった。双方で数万人が失われた。しかしこのような攻勢は永遠に続けられず、1962年半ばまでに完全に停止し、前線のほとんどが塹壕戦に移行した。第二段階が始まり、現在（1963年）に至っている。東ヌービア軍は西部の都市トゥカナを突破しようと試み、多数の死傷者と装備損失を出し、「砂漠の海の真珠」を殻だけにしている。</p>
+  <p>一方、ヌービアの最南端では、西ヌービア軍が忘れられた防衛を突破し、ミネヴィアという小さな都市を攻略し、東部ラインを突破するために化学兵器を使用している。</p>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1440812353665892463/image.png?ex=6af6d4d2&is=6af58352&hm=9b5b92ae61f08639a71d15864c02852749610ff41643f1ef9d6393f9dfd19c12&" alt="統一戦争画像">
+</div>
+
+<!-- ASSAULT -->
+<div id="assault" class="section">
+  <h1>独立への攻撃</h1>
+  <p>1951年IRの前夜、ブロクシア連邦は「ハンマーダウン作戦」の一環としてヌービア共和国への全面侵攻を開始した。迷った島を連邦に取り戻すための作戦だった。共和国はまだ幼く、世界超大国の力に対応するのに苦労した。広範なヌービアの土地が戦略爆撃と艦砲射撃で破壊された。ブロクシア兵はよく装備され訓練されており、ヌービアの相手を容易に打ち破った。</p>
+  <p>戦争は連邦の民衆にとって極めて物議を醸した。彼らは数ヶ月前に終わったコーブロックス帝国との大戦争からの復興を始めたばかりだった。共和国はクレーター山脈付近で戦闘を安定させ、そこでは戦略爆撃で数十万人が死亡し、カシオペア市全体が壊滅した。</p>
+  <p>政治的圧力の高まりと新大統領の選出により、進撃を止めざるを得なくなった。ブロクシアの血を流さずに獲得地を固めるため、新しい衛星政府の創設を構築した…</p>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1440813927213826151/image.png?ex=6af6d649&is=6af584c9&hm=66012d71ede6e9017cd6f5d6c39430dff67d13d42497f5f8b56705ee97b94e43&" alt="攻撃画像">
+</div>
+
+<!-- VERNA -->
+<div id="verna" class="section">
+  <h1>ヴェルナと先住民の歴史</h1>
+  <div class="note">-# Meyā kenot wersha rekiho ha celyana enmorsha kenat satent to.</div>
+  <p>今日世界に知られるヌーブは、ほぼ完全にブロクシアの植民地主義によって形成された民族である。軍事政権が利用可能な資源のほぼすべてを戦争兵器に注ぎ続ける中、「ヌービア再統一努力」に貢献しない研究分野は資金と人員を飢餓状態に置かれている。歴史家はプロパガンダ努力を支援するよう強制され、考古学者は役に立たないとされ建設や資源探査に再配置され、過去の世代のヌーブ人の歴史は埋もれたり「より有用なもの」（砲弾工場など）のために破壊され続けている。</p>
+  <p>これまでのところ、島でそのような運命を免れた唯一の主要な集落はヴェルナ市とその周辺地区である。ヌービア北東部の山中に位置し、地形により外界から比較的手つかずのままだった。最初の接触からほぼ100年後の今も、ヴェルナは現代のブロクシア影響を受けたネイティブ・ヌービック語が100人以上によって話されている唯一のやや主要な人口中心地である。農村の数千人がやや古風なヌービック語変種のみを話し続け、ブロクシア語のヌービック方言を学ぶ実質的な動機を見いだしていない。</p>
+  <p>植民地化以前のヌーブについて何かを学びたい者にとって、ヴェルナは世界でほとんど唯一の場所の一つである。世界のどの歴史家・人類学者・考古学者もこの地を訪れるために莫大な費用を払うだろうが、残念ながら軍事政権の外国人政策がそれを阻んでいる。</p>
+  <div class="note">注：Discordが最近画像を強く圧縮している。最高品質で見るにはブラウザで画像を開いてください。</div>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1442801512265810020/image-17.png?ex=6af6d11e&is=6af57f9e&hm=7fa3b120aec255b18f48521da79a949c79972c193e3e612e7386e947808d6482&" alt="ヴェルナ画像">
+</div>
+
+<!-- BLOXIA -->
+<div id="bloxia" class="section">
+  <h1>ブロクシア連邦</h1>
+  <blockquote>
+  「すべてのアードの政府は共和制の形態をとり、統治される者の同意から正当な権力を得るものとする。いかなるアードも貴族の称号を付与してはならず、自由かつ公正な選挙プロセスの要件を満たさない者がアードの下で利益または信託の公職に就いてはならない。」<br>
+  — 民主保障条項、連邦基本法（1861年）
+  </blockquote>
+  <p>ブロクシア連邦（通称：ブロクシア）は、テルスの西半球の大部分を占めるユニークな大陸横断連邦共和国である。1861年の連邦法によって正式に設立されたが、その基盤は1700年代に遡る複雑な条約と協定の網によって敷かれた。</p>
+  <p>連邦は高度に自律的な6つの加盟国「アード」の連合である：エメラルド・アード、レッドクリフ・アード、ヴィリディア・アード、セフォルク・アード、アストラル・アード、セレスティアル・アード。各アードは主権国家に似て機能し、独自の軍事防衛軍（アードファード）を維持し、限定的な外交を行い、独自の地方自治形態の下で運営される。</p>
+  <p>ほとんどのブロクシア市民にとって、主な忠誠は故郷のアードにある。多くは地元のブロクシア方言だけを話し、他のアードの人々にはほとんど理解不能な場合が多く、地元の政治だけに関わり、故郷のアードの境界を超えて旅行することは稀である。連邦市民権は二次的でしばしば抽象的なアイデンティティの層である。</p>
+  <p>しかし外の世界に対して、ブロクシアは統一され強大な顔を見せる：最後の海外領土にしがみつく元植民地帝国、十年戦争で seemingly superior な敵を打ち破るために動員した不死鳥、そして最も価値あるパートナーまたは最も困難な敵となり得る地政学的巨人。本質的には、単一の国家というより、一つの政治的屋根の下で自らを統治することを選んだ文明である。</p>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1461023255279304939/image.png?ex=6af687b0&is=6af53630&hm=b391542ed6e7cc73dcb8d4f296174a59c18272dcabe64ecc5f54f6ac9ba74fac&" alt="ブロクシア画像1">
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1461023255782490264/image.png?ex=6af687b0&is=6af53630&hm=62cc4b3ef7fa1e2bb24cddaf3fca77a58f67d040b719662f0554ee5739ddb583&" alt="ブロクシア画像2">
+</div>
+
+<!-- DECADE WAR -->
+<div id="decade-war" class="section">
+  <h1>十年戦争とヌーブ兵</h1>
+  <p>十年戦争、または当時の「大戦争」はブロクシア連邦とコーブロックスの間の大規模戦争だった。1947年は戦争の後期段階で、コーブロックスの故郷ノースランドへの侵攻が始まった。これを支援するため、連邦は供給不足・装備不足のヌービック植民地衛兵を連邦化した。ブロクシア将校の下で、ヌービック植民地兵はヴィンダフィヨルデン地域の危険なクラネリ尾根を突破した。</p>
+  <p>ブロクシア部隊を補強する任務中、ヌーブたちは岩と硬い場所の間に挟まれた。支援すべき元の部隊は到着前に壊滅していた。生存者は警告し、コーブロックスの追跡者の波がオルステッド村で彼らを何時間も包囲した。時代遅れのボルトアクションと一部の半自動ライフルしか装備していなかったにもかかわらず、ヌーブの勇気と決意が多くの犠牲を払って無数の攻撃を撃退した。戦略的撤退では、安全に戻るために戦い、ほんの一握りしか安全に戻れなかった。</p>
+  <p>ヌービアの若者男女を外国の地で死なせる決定は、植民地の中で抵抗の炎を点火する沸騰点となった。その炎ははるかに大きなものへと成長することになる。</p>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1463201255722717225/Untitled349_20250424013526.jpg?ex=6af68b1c&is=6af5399c&hm=8c56ccc9854e31be7493c4807d8f36e046dc4a3906c8621a93fd8441e6bb55a6&" alt="十年戦争画像">
+</div>
+
+<!-- NUCLEAR -->
+<div id="nuclear" class="section">
+  <h1>核研究・実験的発電方法施設</h1>
+  <p>一般の人々には「核の場所」としても知られるこの施設は、ナラモ市から遠くない高セキュリティの制限区域で、地区の海岸線のすぐそばに位置する。その作業の性質は完全に機密だが、労働者の家族や特定の情報通からのリークによれば、これは二合一のプロトタイプ原子炉と核物理学研究施設であり、ヌービア島全体で唯一の核施設となる。</p>
+  <p>原子が世界で最も有望かつ危険な技術の一つになったことは秘密ではない。ブロクシア連邦が最初の原子炉を稼働させコーブロックスに核兵器を投下して以来、世界中の国々が同様の能力を獲得する方法を競っており、ヌービア共和国とその後の両方のヌービアも例外ではない。しかし施設を囲む秘密とセキュリティの量は説明が少し難しい。内務サービス人員が地域全体をほぼ完全に支配し、施設の海岸線を囲むかなり広い半径の海軍排除区域を維持し、地元の民事サービス法執行部隊や地上サービス人員さえも上書きしている。エネルギー省のナラモ部門は、国の残りの部分を管理するより広いDoEとはほぼ別の領域のように見え、全国電力網の唯一の責任組織であるにもかかわらず、内務とより多く協力している。</p>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1512217761600901200/image.png?ex=6af6e2ca&is=6af5914a&hm=24ca54dc7ef862ee120d76aa107d0c491a8554c62d37ab672972e4b355e69688&" alt="核施設画像">
+</div>
+
+<!-- SPECIALISTS -->
+<div id="specialists" class="section">
+  <h1>特殊部隊</h1>
+  <h2>謙虚な専門家たち</h2>
+  <p>特殊部隊の概念は特に新しいものではないが（遠い東の国々は半世紀前にすでに有能な兵士を狙撃と塹壕襲撃のために募集していた）、十年戦争の最後の日々まで、様々な国の特殊作戦部隊が従来の軍事部隊から独立して作戦する能力を受け取り始めた。</p>
+  <p>連邦の特殊部隊は、軍事のより大きな支部から別のレベルで本格的な作戦を開始した世界最初のものの一つだった。フュルレンラントでは、そのような新しいアプローチが数十人の人質を救い、数十のテロ細胞を破壊・排除した。やがてそのような発展のニュースがヌービア島に届き、特殊作戦に対する二つの異なるアプローチが現れた。西はブロクシア訓練の実験的部隊を幅広い作戦に任務づけ、東は想像できる最悪の条件を戦い抜きそれでも頂点に立つ究極の生存者に倍掛けした。</p>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1512530033703518228/image.png?ex=6af6b41d&is=6af5629d&hm=8b9e19fea3575849e9d05deaa55d1ae3dbfea69365459e79c467196bb4d4382a&" alt="特殊部隊画像">
+  <h2>西部の専門家たち</h2>
+  <p>連邦地上防衛軍の専門家は主に様々なFGDFレンジャーによって代表される。かつて専門化された高強度都市戦部隊だったものは、あらゆる種類の高度に専門化された歩兵部隊の包括的分類へと成長した：以前の都市戦専門家、破壊工作員と潜入者、空騎兵、専用暗殺者など。その点で、西部特殊部隊は東部の対応物とは全く異なる。軍事政権が生存者とブルートフォース攻撃専門家を展開する一方、連邦共和国は特定の任務のために構築された小規模部隊を多数展開し、特定のSF級仕事のために非軍事部隊さえ訓練する。そのようなケースの一つが西ヌービアの警察SWATで、東部占領地域に残るために特別に訓練され、軍との秘密通信線を静かに確立し、地元の民間抵抗を支援し、東部占領軍に対する嫌がらせと破壊工作を行う。そのためSWATは東部兵器への必須の習熟がある。</p>
+  <p>西ヌービアは連邦のおかげで、敵に比べて大幅に高い基準でレンジャーを装備・訓練できる：携帯（重いが）ATGMシステム、対物ライフルの大予備、現代の無誘導対戦車システム、そして最も重要なことにヘリコプター。ブロクシア供給がより基本的な装備の大量を確保することで、西はRnDと工業能力をより特定のニッチに集中できる。NRAI「スキダー」（古いヌービック語でロビン鳥を意味し、「スキーダー」と発音されるが、主に「スカイダー」と誤解される）は西ヌービアの国産軽量ヘリコプターである。</p>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1513033991832207391/image.png?ex=6af68f36&is=6af53db6&hm=d71ecf71c460687e6e3e330be71e6fdf3f57fb9db50579ccdbedbebac8b577aa&" alt="西部特殊部隊画像">
+</div>
+
+<!-- REDWICK -->
+<div id="redwick" class="section">
+  <h1>レッドウィック・アワー - E83S4</h1>
+  <p><em>以下はRBC編集スタッフによって準備された要約トランスクリプトである。一部の観客反応とホストのコメントは読みやすさのために要約されている。</em><br>
+  放送日：1963年3月14日</p>
+  <p>エピソード84はアルダーのいつものモノローグで始まった。連邦の最近の予算討論を約8分カバーし、レッドクリフ教育大臣の新しい髪型についてのジョークでかなりの観客の笑いを誘い、ヌービア戦争の2周年についての短いセグメントで「2年経っても、どちら側も相手に十分だと言っていないようだ」という異例に物悲しい観察で締めくくった。最初のゲストはレッドクリフFCの先発ゴールキーパーで、来るシーズンについて話し、アルダーにサイン入りジャージを贈り、彼は残りのショーでそれを着た。音楽パフォーマンスが続いた。</p>
+  <p>ムセラシル（ファーストネームのみ使用を要求）がエピソードの第三セグメントに約41分で登場した。彼は編集ノートが「明らかに借り物」と記述する無地の灰色のスーツで舞台に現れ、拍手に何をすべきか目に見えて不確実に認め、座った。アルダーは彼を「テルスで最も閉鎖的な国の一つから歩き出し、どういうわけかストリーフィールドにたどり着いた男」として紹介した。これはムセラシルが完全に理解していないようだった笑いを誘った。彼は23歳である。</p>
+  <h3>インタビュー抜粋</h3>
+  <p><strong>Q</strong>: まず最初に、あなたの名前はどう発音するのですか？プロデューサーが今週ずっと議論していました。<br>
+  <strong>A</strong>: ムセラシル..まあ..そのように？ mser-aahh-sheel。弁解するに、地元の人でさえほとんどの人が苦労するでしょう..非ブロクシア人の名前は今ではあまり一般的ではありません。</p>
+  <p><strong>Q</strong>: あなたはスペシャリストだったのですね？それは実際何を意味しますか？普段何をしていたのですか？<br>
+  <strong>A</strong>: まあ、戦争前はほとんどの日が..射撃場、演習、いつもの軍事 stuff でした。あなたの人たちも同じことをしていると思います。</p>
+  <p>戦争が始まると、死なないようにするか、隠れる場所を作るためにものを運ぶか、しばしば砲撃下で、終わりのない迫撃砲と砲兵から逃れるためでした。その時点であなたの通常の火曜日は、周囲の全員があなたを殺そうとする建設労働者のようなものでした。</p>
+  <p><strong>Q</strong>: 人々は何をして楽しむのですか？東ヌービア人は働いていない時や軍隊にいない時に何をしますか？<br>
+  <strong>A</strong>: うーん..まあ、若者の間ではブッククラブがかなり一般的です。テレビは高価でラジオはすぐに飽きるので、本の世界にさまよう方が常に好ましい選択肢でした。</p>
+  <p>禁止されたものは常に誰にとっても最も興味深いもので、基本的に通貨のように交換していました。平和や愛について話す古典的なブロクシアの本の一つでかなりのものを得ることができました。</p>
+  <p>そして..残念ながら、薬物も。かなりの量。</p>
+  <p>（中略）</p>
+  <p><strong>Q</strong>: 戦争が明日終わって東ヌービアが国境を開いたら、戻りますか？<br>
+  <strong>A</strong>: 絶対にいや。両親に手紙を書くかも、ある時点で会うかも、それ以上はない。</p>
+  <p><strong>Q</strong>: 今夜見ている人々に、あなたが来た場所について何を理解してほしいですか？<br>
+  <strong>A</strong>: まあ..私はここに座って、あなたの言語であなたと話していて、部分的にあなたに影響された名前を持っています。私たちはそれほど違わない。あなたの平均的なレッドクリフ人、ヴィリディア人、アストラリアンなどより悪くも愚かでもない..基本的に、黄色い民に asshole にならないで、彼らはそれを値しない。</p>
+  <div class="note">エピソード84は740万人の視聴者を集め、現在のシーズンで最も視聴されたエピソードとなった。放送後の週にRBCは約400通の手紙を受け取った。編集部の要約は通信を「強く分かれた」と記述している。</div>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1524150869627637760/image.png?ex=6af6cadc&is=6af5795c&hm=3359ff75238759f4cbb830252c9308bfe2b564135a98063e4ed9f81990d3e92f&" alt="レッドウィック画像">
+</div>
+
+<!-- KORBLOX -->
+<div id="korblox" class="section">
+  <h1>北の人々（コーブロックス）</h1>
+  <p><strong>コーブロックスの国</strong>（公式には中部首長国 - 「イメーギニョーダジー」、また稀に「コディア」と呼ばれる - コーブロックスのエンドニム「コディジー」から）は、コーブロクシアとして知られる中北部大陸の半分少しを占める800万人（十年戦争後）の大きな国である。</p>
+  <p>市民の82%は民族的にコーブロックス人（コディアン）で、主に雪のような白い肌の色と一般的な明るい色の髪（白、ブロンド、銀など）が特徴で、残りの17%がロブロックス人、1%が他の民族、主にグラウフォークである。</p>
+  <p>コーブロックスの歴史は2500〜3000年前に遡り、土地は数百の小さな部族によって居住されていた。大陸の大部分は古代社会が快適に暮らすのに適しておらず、コーブロックス部族はしばしば波状に競争の少ない場所を探して出航し、多くはロブロクシアや北部ロブロクシアにたどり着き、地元の部族や王国と衝突した。これらの拡張の波はしばしば地元文化に重要な痕跡を残した。古いブロクシア文学とアードの神話はすべて頻繁に「北部の獣」「北部の脅威」などを言及する。</p>
+  <p>（歴史の詳細は省略せず、原文に基づく翻訳を継続。1700年代に12の主要首長国が出現し、1800年代に封建的な連合へと合併し、1900年代初期に単一の影響力ある政治グループの下で統一され、最初のデススピーカーが出現した。1938年までに大陸は中部首長国、すなわちコーブロックス帝国の旗の下に統一された。）</p>
+  <div class="note">描写：平和主義者と報復主義者の代表間の別の衝突後の通りを監視するために展開されたコーブロックス兵士のパトロール。1963年、コーブロックス軍は軍事力であると同時に公共セキュリティ力である。</div>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1532078165533524319/image.png?ex=6af6a0bb&is=6af54f3b&hm=1622585b29703fd9c0d1d71d516ceddef98c6cce02efae3a842f400f3eb7cfcc&" alt="コーブロックス画像">
+</div>
+
+<!-- NORTHERN FRONT -->
+<div id="northern-front" class="section">
+  <h1>北部戦線</h1>
+  <p>再統一戦争が東の容赦ない猛攻と西の頑固な回復力の間の grinding な競争である一方、いくつかの場所は時間に凍結されたままである。 heavily fortified な静的位置で、現代戦争の戦術的新しさに触れられていない。砂漠の都市トゥカナが戦争の最大かつ最も残酷な要塞ネットワークである一方、一つの特定の西部防衛拠点が同等に重要な負担を静かに担っている。ヴァリアの都市である。</p>
+  <p>連邦共和国の北岸に位置するヴァリアは、第1・第2東部師団の力がイースト・ベルゲン州の takeover を完了するのを防ぐ最後の主要な障害である。北部戦線は軍事政権の最も成功したものだった。イースト・ベルゲンの約半分が戦いの最初の年に陥落し、北が戦争の決定的な劇場になる可能性を一時的に示唆した。しかしその後、西部勢力の急速な統合とヴァリアとその周辺の異常に迅速な要塞化が続き、都市の郊外は東部装甲の墓地となり、数十のVT-1とVT-2がヴァリアの森の中で燃えて残された。</p>
+  <p>1963年が終わりに近づくにつれ、ヴァリアは毎月保持が難しくなっている。トゥカナが利用可能なほぼすべての補強を消費し続け、南の山々が兵士がしなければならなかった仕事を続けている。北部戦線はどちらの利点も享受しない。自然の障壁もなく、優先補給もなく、救済の見通しもない。それが持っているのは第18歩兵連隊であり、今のところそれで十分のようである。</p>
+  <div class="note">描写：連邦地上防衛軍第18歩兵連隊第12装甲大隊の4両のRM-3-U4中戦車が、第2師団第211装甲大隊の東部VT-2-A1戦車の接近する小隊と交戦している。</div>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1535360686945861752/image.png?ex=6af6b451&is=6af562d1&hm=20909016cb780238a0fed16f51806b54056328093076232e0f71a87ccb1b627f&" alt="北部戦線1">
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1535360687638061086/image.png?ex=6af6b451&is=6af562d1&hm=136d61cfa42f7c3774b0440ee5701e37fe3022c008729218059200a8d5556746&" alt="北部戦線2">
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1535360687986053230/image.png?ex=6af6b451&is=6af562d1&hm=6be4d9b4f11daceaeb77a965ebd2501134757a33e11d3ba948cb46fbc1726521&" alt="北部戦線3">
+</div>
+
+<!-- ARMS -->
+<div id="arms" class="section">
+  <h1>自由世界への自由な武器</h1>
+  <p>大量のグローバル産業の advent 以来、戦争の武器はテルスの大陸を自由に旅し、多くの小さく工業的に能力の低い人々に売られライセンスされた。テルスの西部、中央、東部「世界」の間の深刻な断絶のため、武器の多様性は地域間で wildly 異なる：ブロクシアの武器が西を支配し（ブロクシア人自身が使用するほど成功した非ブロクシアのアウトライヤーなしではない）、数十万のコーブロックス国産兵器が「中央」とその新しく自由な国々に散らばり、東はヴィリディアから銀の王国、イスラニアからハゾウギまで dozens のより小さな供給者の間で引き裂かれている。</p>
+  <p>東ヌービアの国産D-22ライフルのメカニズムの中に、ヴィリディアのアルブラストとの eerie な類似性を見いだすことができ、連邦ヌービアのランクの中に、戦いの匂いを嗅いで引き寄せられた傭兵と志願者によって世界中から dozens の武器を見いだすことができ、ブロクシア連邦のランクの中に、評価と調達目的のために自国のものと対戦させた無数の外国装備の trials を見いだすことができる。</p>
+  <p>（リンクス偵察車とメジヤ中戦車の詳細な記述が続く。リンクスはエンピレア出身で、フュルレンラントでの狭い通りでの成功が有名。メジヤはハゾウギ出身で、シンプルさと洗練された火器管制が特徴。）</p>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1542234471523287100/image.png?ex=6af6a987&is=6af55807&hm=231931a5ae58080e28208e808430b44f90a5becb90baac30412fc5e1dc2d6aa2&" alt="リンクス画像">
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1542794054058909716/image-14.png?ex=6af6b86e&is=6af566ee&hm=0363c8e15746358303aa4e536194ad51437ba9251645f790a404b1e761e915ed&" alt="メジヤ画像">
+</div>
+
+<!-- WORLDS -->
+<div id="worlds" class="section">
+  <h1>三つの世界</h1>
+  <h2>北部の島々</h2>
+  <p>西部世界の北には、ネコティコズ、オリンシア、ノルズラの3つの特異な島国がある。大陸の歴史からかなり遠いが、同時にそれと密接に絡み合っている。それぞれユニークなものを提供するが、多くの点で大陸の兄弟と非常に似ている。</p>
+  <p><strong>オリンシア</strong>：歴史の大部分で数千年前に大陸から出航したコーブロックス人の人口の故郷であり、「コーブロックス人」が inherently 暴力的で邪悪と等しくないことの究極の証明である。平和で繁栄した国で、人々は最近の多くの発明を革新するのを助け、すべての隣人との友好的な関係を維持し、十年戦争中にコーブロックスの侵略者に対して勇敢に戦った。</p>
+  <p><strong>ネコティコズ</strong>：形成期の初期に大陸の探検家によって発見され、西部世界の最大の貿易ハブの一つであり、残る2つの西部君主国の一つである。武装勢力は実質的に存在しないが、その経済的潜在力、民間海事産業、エレガントな外交、世界的に有名なエンターテインメント産業が、それを関連性があり独立し繁栄したままに保っている。</p>
+  <p><strong>ノルズラ</strong>：単に平和に存在する国で、あまり豊かでも貧しくもなく、誇り高くも妬ましくもなく、その極北の近北極領土が自然自体に挑戦し、人間が惑星の法則に縛られないことを証明している。すべての隣人に商品と技術を heavily 依存しているにもかかわらず、存在することを許されている。結局、雪と氷のシートを統治しようとするのを誰が bother するだろうか？</p>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1544047657779994705/image.png?ex=6af6aab0&is=6af55930&hm=e2b310de39195140465bfbd51de39ded53539f077a13df62425d6cc017674504&" alt="北部島々画像">
+  <h2>中央世界</h2>
+  <div class="disclaimer">描写された地図はBlaleyのヌービック・ストラトクラシー設定に exclusively canon であり、「ヌービック・ストラトクラシー」ウォーグループの設定とは結びつかない。</div>
+  <p>中部首長国のコーブロックス大陸に対する帝国は1950年に十年戦争の終わりに崩壊し、ブロクシア勢力によって徹底的に解体・武装解除され、その後単に去った。今残っているのは空のコーブロックスで、土地はたくさんあるが人々は十分でなく、その土地上の適切に開発され住みやすい空間も十分でない。そして dozens の新しく独立した国々で、いくつかは数百年間独立を知らなかった部族から形成され、いくつかはより最近のコーブロックス占領期間から解放された。</p>
+  <p>（詳細な戦後のコーブロクシアの状況、コーブロックス連合、リトル・ブロクシア（サニリム、ゲリラス、ゲリンログ）などの記述が続く。）</p>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1544417455932317726/image.png?ex=6af6b197&is=6af56017&hm=fadd8630e56f6adfac285ad68b6c8428da18e079786fa871cd8d2796c38aeed0&" alt="中央世界画像">
+  <h2>東部世界</h2>
+  <p>東部世界、「世界の中の世界」、遠い世界など…他の二つの世界とは異なり、東、ヒンターランド、イスラニア、南部ヒンターランドは、その文明のはるかに混沌とし、乱雑で不均一な成長を見、結果として roughly 同時にその様々な部分でユニークで無関係な文化が出現した。</p>
+  <p>（ハゾウギ、フエゲア、ヴィリディア、イントラニア、ガルラ、テラヴァンティア諸国、ジルニ文化、ゼラミア語圏、アイヴォリア人など、ヒンターランドの詳細な地域記述が続く。HICORなどの組織についても言及。）</p>
+</div>
+
+<!-- MODERN -->
+<div id="modern" class="section">
+  <h1>現代のテルス世界</h1>
+  <p>さらに検査すると、テルスの三つの世界すべてがいくつかの類似点を共有していることが明らかになる：最終的に、すべてが戦争が damage すぎ、scarring すぎ、demanding すぎる点に達する。その点で、外交が部屋に入ることを許され、複雑な種類の、妥協、交渉、何時間もの書類仕事と話し合い。結局、紙を押す者と話者の軍隊を維持する方が、実際の proper な軍隊を維持するよりはるかに安い。</p>
+  <p>（西のブロクシア連邦、LANTerns、中央のコーブロックス連合とウルスン、東のヒンターランド協力機構（HICOR）とその権利宣言、平和維持活動などの詳細が続く。）</p>
+  <div class="note">描写：HICOR平和維持軍のガルラ大隊がコーブロクシアのどこかへの任務に展開している。一部の描写されたヘルメットには標準コーブロックス語で「Peacekeeper」が拙く描かれている。平和維持の分野全体が brand new なので、専用装備はまだなく、そのような任務に志願した兵士は何を持っていくか、どう自己を提示するかを推測しなければならない。</div>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1546262466609291294/image.png?ex=6af6d064&is=6af57ee4&hm=88a6d28848b5b48ee8c38de61211fcee22cd6a90128bc87c068090eb16aaf6c4&" alt="HICOR画像">
+</div>
+
+<!-- LAND NOOBIA -->
+<div id="land-noobia" class="section">
+  <h1>ヌービアの地</h1>
+  <p>「Land」は、法的に言えば、ブロクシア連邦がアードではないその支配下の領土を指す用語である。</p>
+  <p>ヌービアの地は連邦の最大かつ最も人口の多いLandで、連邦レベルの選挙で投票する権利も、連合の連邦機関内の専用代表も持たない数十万の連邦市民の故郷だった。</p>
+  <p>他のLandsと同様に、ヌービアには独自の基本法（他の言語では憲法としても知られる）がなく、その法的事項は直接連邦の基本法に委ねられた。ヌービアは他のLandsと同様に、Captain-Governorによって統治され、この人物は連邦大統領によって直接任命され、任期は6年で、2期まで延長可能だがそれ以上はない。元々Captain-Governorsは連邦海軍の植民地・探検船の船長だった。後に役割は専用の政治的地位となり、軍関係者によって占められることは稀になった。そしてさらに後の1953年に、投票するのに十分な市民を持つすべてのLandsで選挙制となった。ヌービアはこの改正が施行される前に離脱した。その最後のCaptain-Governorはフランクリン・ハリゴールドだった。</p>
+  <p>（植民地化の詳細、西部の発展、東部の資源、人口増加、十年戦争の影響、NACの形成と不満の蓄積が続く。）</p>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1551309609757708288/image.png?ex=6af6b7e8&is=6af56668&hm=3aa0e924379318d923358b5e7e1b5346ba923f9d8ee3eaa4845d778c255fe6c1&" alt="ヌービアの地画像">
+</div>
+
+<!-- UPRISING -->
+<div id="uprising" class="section">
+  <h1>ヌービア蜂起</h1>
+  <p>1947年のある時、地元のブロクシア政治家でヌービック権利活動家のハーヴェイ・ブライトが、ヌービック陸軍軍団（NAC）の将校グループから連絡を受けた。ハーヴェイはブロクシアのヌーブの間でほとんどカルトのような支持者を持っていた。彼の何年もの法案、抗議、法廷戦争が、連邦の広大な土地全体の数百、数千ではないヌーブを貧困、差別、しばしば死から救った。彼の評判はどのヌービック軍事関係者、どの親ヌービック・ブロクシア政治家、どの反植民地活動家よりも上にあった。ハーヴェイ・ブライトは、ヌービアの人々に権利と自由を稼ぐように運命づけられた人物のようだった。</p>
+  <p>将校たちは単純な要求を持っていた：自由なヌービアを導くこと。十年戦争の outbreak とそれにヌービック勢力が関与して以来、NACの最高関係者のグループがブロクシアに対するヌービック蜂起の計画を立てていた。</p>
+  <p>（蜂起の詳細な経過：1948年1月の諜報報告、2月4日の銃撃の勃発、広範な戦闘、避難、3月18日の独立宣言などが続く。）</p>
+  <div class="note">描写：CAF歩兵の部隊と孤独な植民地保安官が、ヌービア蜂起の sometime 中に革命家の群衆と交戦している。</div>
+  <img src="https://cdn.discordapp.com/attachments/1438618431510413342/1567337842915549234/image.png?ex=6af7055d&is=6af5b3dd&hm=67dadc414c2abbfc3636d3baf81a1c816c1dd37f68a9c2620e8d88b9494de34e&" alt="蜂起画像">
+</div>
+
+<!-- FACTIONS -->
+<div id="factions" class="section">
+  <h1>派閥紹介</h1>
+  <p>ストーリーに基づく主要勢力一覧。各勢力の同盟・敵対・中立関係を記載しています。東ヌービア・西ヌービア・ブロクシアはゲーム内チームがあるため、クリックでチーム紹介（準備中）を表示できます。</p>
+
+  <h2>主要戦力（ゲームチームあり）</h2>
+
+  <div class="faction-card east-card">
+    <h3>ヌービアの軍事政権（東ヌービア）</h3>
+    <p>1952年に共和国を倒して成立した軍事独裁国家。島の東部68%を支配し、再統一戦争を継続中。市民は外部から完全に隔離され、軍が生活のほぼすべてを管理。</p>
+    <p><strong>同盟：</strong> ほぼなし（極端な孤立主義。反ブロクシア感情のある一部勢力とは非公式の接触がある可能性）</p>
+    <p><strong>敵対：</strong> ヌービア連邦共和国（西ヌービア）、ブロクシア連邦</p>
+    <p><strong>中立：</strong> コーブロックス、ヴィリディア、ハゾウギ、ヒンターランド諸国、コーブロックス連合など（直接の戦争状態にはない）</p>
+    <button class="nav-btn" style="margin-top:8px; background:#eaf3ff;" onclick="toggleTeam('east-team')">▶ 東ヌービアチーム紹介を表示</button>
+    <div id="east-team" style="display:none; margin-top:10px; padding:10px; background:#f0f7ff; border-radius:4px; border-left:4px solid #3b82f6;">
+      <strong>東ヌービア公式派閥・通常チーム</strong><br>
+      ナラモ原子力発電所関連の東ヌービア側チームです。<br><br>
+      <strong>公式派閥</strong><br>
+      <button class="nav-btn" onclick="showSection('nmp')">▶ NMP（ヌービック軍事警察）</button><br>
+      <button class="nav-btn" onclick="showSection('nes')">▶ NES（ヌービック工学サービス）</button><br>
+      <button class="nav-btn" onclick="showSection('anro')">▶ ANRO（高度ヌービック原子炉運用）</button>
+      <hr style="margin:8px 0;">
+      <button class="nav-btn" onclick="showSection('2nia')">▶ 2NIA（第2情報機関）</button><br>
+      <button class="nav-btn" onclick="showSection('csp')">▶ CSP / 8NEC（民生サービス）</button><br>
+      <button class="nav-btn" onclick="showSection('nsp')">▶ NSP（海軍サービス）</button><br>
+      <button class="nav-btn" onclick="showSection('fedgov')">▶ Federal Government（NAMS）</button><br>
+      <button class="nav-btn" onclick="showSection('nosha')">▶ NOSHA（労働安全衛生）</button>
+      <hr style="margin:8px 0;">
+      <strong>通常チーム（Plant Defense / Department of Energy）</strong><br>
+      <button class="nav-btn" onclick="showSection('plant-security')">▶ Plant Security</button><br>
+      <button class="nav-btn" onclick="showSection('trt')">▶ Tactical Response Team</button><br>
+      <button class="nav-btn" onclick="showSection('gsp')">▶ Ground Service Personnel</button><br>
+      <button class="nav-btn" onclick="showSection('soc')">▶ Special Operation Command</button><br>
+      <button class="nav-btn" onclick="showSection('lmp')">▶ Local Military Police</button><br>
+      <button class="nav-btn" onclick="showSection('gsfm')">▶ Ground Service Field Medics</button><br>
+      <button class="nav-btn" onclick="showSection('13acr')">▶ 13th Armoured Cavalry Regiment</button><br>
+      <button class="nav-btn" onclick="showSection('plant-maintenance')">▶ Plant Maintenance</button><br>
+      <button class="nav-btn" onclick="showSection('logistics')">▶ Logistical Operations</button><br>
+      <button class="nav-btn" onclick="showSection('reactor-ops')">▶ Reactor Operations</button><br>
+      <button class="nav-btn" onclick="showSection('plant-admin')">▶ Plant Administration</button>
+      <p style="margin-top:8px; font-size:0.9em;">Plant DefenseとDepartment of Energyは東ヌービア側のチームです。</p>
+    </div>
+  </div>
+
+  <div class="faction-card west-card">
+    <h3>ヌービア連邦共和国（西ヌービア）</h3>
+    <p>1952年にブロクシアによって衛星国家として設立された民主共和国。島の西部32%を支配。自由市場経済で、民主主義を支持。防衛的な軍事姿勢を基本とするが、1963年以降一部で攻勢に転じている。</p>
+    <p><strong>同盟：</strong> ブロクシア連邦（大規模な軍事援助・助言・装備供給）</p>
+    <p><strong>敵対：</strong> ヌービアの軍事政権（東ヌービア）</p>
+    <p><strong>中立：</strong> その他のほとんどの国（コーブロックス、ヒンターランドなど）</p>
+    <button class="nav-btn" style="margin-top:8px; background:#eaf3ff;" onclick="toggleTeam('west-team')">▶ 西ヌービアチーム紹介を表示</button>
+    <div id="west-team" style="display:none; margin-top:10px; padding:10px; background:#fef2f2; border-radius:4px; border-left:4px solid #ef4444;">
+      <strong>西ヌービアチーム</strong><br>
+      Externalカテゴリの西ヌービア側チームです（ブロクシア系を除く）。<br><br>
+      <button class="nav-btn" onclick="showSection('wnaf')">▶ West Noobian Assault Force</button><br>
+      <button class="nav-btn" onclick="showSection('fmdf')">▶ Federal Maritime Defense Force [GAMEPASS]</button><br>
+      <button class="nav-btn" onclick="showSection('frr')">▶ Federal Ranger Regiment [GAMEPASS]</button>
+      <p style="margin-top:8px; font-size:0.9em;">CiviliansやIncarceratedは中立寄りですが、主にプラント周辺の役割です。</p>
+    </div>
+  </div>
+
+  <div class="faction-card west-card">
+    <h3>ブロクシア連邦</h3>
+    <p>6つの高度に自律的なアード（エメラルド、レッドクリフ、ヴィリディア、セフォルク、アストラル、セレスティアル）からなる大陸横断連邦共和国。元植民地帝国で、十年戦争の勝利国。西ヌービアを支援し、東ヌービアとは敵対関係。</p>
+    <p><strong>同盟：</strong> ヌービア連邦共和国、エンピレア、オリンシアなど</p>
+    <p><strong>敵対：</strong> ヌービアの軍事政権、（過去）コーブロックス帝国</p>
+    <p><strong>中立：</strong> 多くのヒンターランド諸国、HICOR加盟国の一部、コーブロックス連合など</p>
+    <button class="nav-btn" style="margin-top:8px; background:#eaf3ff;" onclick="toggleTeam('bloxia-team')">▶ ブロクシアチーム紹介を表示</button>
+    <div id="bloxia-team" style="display:none; margin-top:10px; padding:10px; background:#fef2f2; border-radius:4px; border-left:4px solid #ef4444;">
+      <strong>ブロクシア連邦チーム</strong><br>
+      ブロクシア連邦側のチームです。<br><br>
+      <button class="nav-btn" onclick="showSection('bloxia-team-game')">▶ Bloxian Commonwealth [GAMEPASS]</button><br>
+      <button class="nav-btn" onclick="showSection('1sfa')">▶ 1st Support & Foreign Aid（1SFA）</button>
+      <p style="margin-top:8px; font-size:0.9em;">1SFAはBloxian Commonwealthの秘密サブチームです。</p>
+    </div>
+  </div>
+
+  <h2>その他の主要勢力</h2>
+
+  <div class="faction-card">
+    <h3>コーブロックス（中部首長国）</h3>
+    <p>コーブロクシア大陸の約半分を占める大国。人口約800万人。雪のような白い肌と明るい髪が特徴。1938年に帝国として統一されたが、十年戦争でブロクシアに敗北し解体・武装解除された。現在は軍事力であると同時に国内治安維持も担う。</p>
+    <p><strong>同盟：</strong> 現在は明確な大規模同盟なし</p>
+    <p><strong>敵対：</strong> （過去）ブロクシア連邦。現在は表面的に平和</p>
+    <p><strong>中立：</strong> 東・西ヌービア、コーブロックス連合、ヒンターランド諸国</p>
+  </div>
+
+  <div class="faction-card">
+    <h3>ヴィリディア</h3>
+    <p>ヒンターランドの主要大国の一つ。ブロクシアに次ぐ規模の勢力で、規制された経済モデルを持ち、伝統的な建築を維持。言語・市場・通貨が地域の標準。多くの元ブロクシア人が移住し、市民となっている。</p>
+    <p><strong>同盟：</strong> 近隣の一部ヒンターランド諸国</p>
+    <p><strong>敵対：</strong> 特になし（ブロクシアとはライバル関係だが戦争状態ではない）</p>
+    <p><strong>中立：</strong> ヌービア両国、コーブロックス、ブロクシア</p>
+  </div>
+
+  <div class="faction-card">
+    <h3>ハゾウギ</h3>
+    <p>南東部の島国。小国ながら世界有数の海軍力を持ち、「世界第3の海軍」と呼ばれることもある。高品質の軍事輸出産業を持つ。メジヤ中戦車などで知られる。</p>
+    <p><strong>同盟：</strong> 特になし</p>
+    <p><strong>敵対：</strong> 特になし</p>
+    <p><strong>中立：</strong> ほとんどの国（武器輸出を通じて関係）</p>
+  </div>
+
+  <div class="faction-card">
+    <h3>コーブロックス連合</h3>
+    <p>コーブロクシア東部の複数の小部族が合流して形成された比較的裕福な国家。天然資源を輸出し、産業と軍を近代化。外交で他のコーブロックス系国家を取り込もうとしている。</p>
+    <p><strong>同盟：</strong> 一部の近隣部族国家</p>
+    <p><strong>敵対：</strong> 特になし（再統一を主張する少数派あり）</p>
+    <p><strong>中立：</strong> コーブロックス、リトル・ブロクシア、ブロクシア</p>
+  </div>
+
+  <div class="faction-card">
+    <h3>リトル・ブロクシア（サニリム、ゲリラス、ゲリンログ）</h3>
+    <p>コーブロクシア南部の3国。戦後ブロクシアの復興プログラムで支援を受け、急速に発展。ブロクシア式の政府・経済・軍事を採用し、「Örds」と呼ぶ内部区分も。北部の部族襲撃者から「協力者」として狙われやすい。</p>
+    <p><strong>同盟：</strong> ブロクシア連邦（強い経済・軍事的結びつき）</p>
+    <p><strong>敵対：</strong> 一部の報復的な北部部族勢力</p>
+    <p><strong>中立：</strong> 東・西ヌービア、ヴィリディアなど</p>
+  </div>
+
+  <div class="faction-card">
+    <h3>オリンシア</h3>
+    <p>北部の島国。コーブロックス系の民族が暮らすが、平和で繁栄した国。十年戦争ではコーブロックスの侵略に抵抗。技術革新に貢献し、友好的な外交を行う。</p>
+    <p><strong>同盟：</strong> ブロクシア連邦、近隣島国</p>
+    <p><strong>敵対：</strong> 特になし</p>
+    <p><strong>中立：</strong> ヌービア両国、コーブロックス</p>
+  </div>
+
+  <div class="faction-card">
+    <h3>ネコティコズ</h3>
+    <p>西部世界の主要な貿易ハブの一つ。残存する君主国の一つ。軍事力はほぼないが、経済・海事・エンターテインメント産業で影響力を保つ。</p>
+    <p><strong>同盟：</strong> 特になし（中立的な貿易国家）</p>
+    <p><strong>敵対：</strong> 特になし</p>
+    <p><strong>中立：</strong> ほぼすべての国</p>
+  </div>
+
+  <div class="faction-card">
+    <h3>ノルズラ</h3>
+    <p>極北の島国。雪と氷の厳しい環境にあり、近隣に物資を依存しつつも平和に存在。誰も積極的に支配しようとする国ではない。</p>
+    <p><strong>同盟：</strong> 特になし</p>
+    <p><strong>敵対：</strong> 特になし</p>
+    <p><strong>中立：</strong> すべての国</p>
+  </div>
+
+  <div class="faction-card">
+    <h3>ヒンターランド協力機構（HICOR）</h3>
+    <p>1954年に結成されたヒンターランド諸国の協力機構。普遍的権利宣言を持ち、化学・生物兵器の禁止、平和維持活動（特にコーブロクシア安定化ミッション）を行う。ガルラなどの部隊が参加。</p>
+    <p><strong>同盟：</strong> 加盟国間の協力関係</p>
+    <p><strong>敵対：</strong> 特になし（平和維持を目的）</p>
+    <p><strong>中立：</strong> ヌービア、ブロクシア、コーブロックスなど外部勢力</p>
+  </div>
+
+  <div class="faction-card">
+    <h3>イントラニア</h3>
+    <p>元ブロクシア植民地で独立を勝ち取った国。「人民の統治」という直接民主主義的な伝統を持つ。ブロクシアに強い反感を抱き、言語や文化の使用を制限する風潮がある。</p>
+    <p><strong>同盟：</strong> 近隣の同民族国家</p>
+    <p><strong>敵対：</strong> ブロクシア連邦（歴史的・感情的）</p>
+    <p><strong>中立：</strong> ヌービア両国、ヴィリディア</p>
+  </div>
+
+  <div class="faction-card">
+    <h3>ガルラ</h3>
+    <p>武装中立を選択した元植民地。ブロクシアとイントラニアの間でバランスを取り、どちらとも軍事協力を避けている。</p>
+    <p><strong>同盟：</strong> 特になし（中立政策）</p>
+    <p><strong>敵対：</strong> 特になし</p>
+    <p><strong>中立：</strong> ブロクシア、イントラニア、その他</p>
+  </div>
+
+  <p style="margin-top:2em; font-size:0.9em; color:#54595d;">※関係性は1963年頃のストーリー時点に基づきます。状況により変化する可能性があります。チーム紹介は今後詳細を追加予定です。</p>
+</div>
+
+<!-- NMP -->
+<div id="nmp" class="section">
+  <h1>NMP（Noobic Military Police / ヌービック軍事警察）</h1>
+  <p>「FAUCES IUSTITIAE」</p>
+  <p>NMPはヌービア軍事政権の指定軍事警察（本物のStratocracyとは混同しないこと）であり、ナラモ原子力発電所内に駐屯する。公式ファクションで、加入には申請とカデットアカデミーの通過が必要。ゲーム内で唯一ユニークチームを持つ。</p>
+  <div class="note">現在ロックダウン中（チームとしてゲームに参加不可。チャットのみ可能）。</div>
+  <p>任務：DOEおよび戦闘人員の規律監督・維持。プラント周辺の秩序と平和を執行し、すべてが円滑に進むよう確保する。NMPはモデレーターではなく、NAMSと同等の権限は持たない。</p>
+  <p>内務サービス人員として解雇に対する完全な免責権を持つ。逮捕・指名手配の対象外。</p>
+
+  <h2>階級</h2>
+  <p>※制服は古い可能性あり。オフィサーは一部ギアを下位階級のものに変更可能。</p>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:0.95em;">
+    <tr style="background:#eaecf0;"><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">階級</th><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">要件</th><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">主な装備・外見</th></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Patrol Cadet</td><td style="border:1px solid #a2a9b1; padding:6px;">申請通過（2週間ごと）</td><td style="border:1px solid #a2a9b1; padding:6px;">ALICE黒サスペンダー・ベルト・ポーチ、コンパクトヘッドセット、濃紺パトロールキャップ</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Junior Patrol Officer</td><td style="border:1px solid #a2a9b1; padding:6px;">カデットアカデミー修了</td><td style="border:1px solid #a2a9b1; padding:6px;">3ammoポーチ、追加ポーチ、濃紺PASGTヘルメット＋ゴーグル、Dutyベルトなど</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Patrol Officer</td><td style="border:1px solid #a2a9b1; padding:6px;">100ポイント + JPOとして1週間</td><td style="border:1px solid #a2a9b1; padding:6px;">タクティカルバイザー、カバー付きPASGTゴーグル、大きめポーチ</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Senior Patrol Officer</td><td style="border:1px solid #a2a9b1; padding:6px;">200ポイント + POとして1週間</td><td style="border:1px solid #a2a9b1; padding:6px;">黒リフトフェイスシールド、黒アビエーター</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Field Patrol Officer</td><td style="border:1px solid #a2a9b1; padding:6px;">300ポイント + SPOとして1週間</td><td style="border:1px solid #a2a9b1; padding:6px;">SPOと同じモーフ</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Lead Patrol Officer</td><td style="border:1px solid #a2a9b1; padding:6px;">400ポイント + FPOとして2週間</td><td style="border:1px solid #a2a9b1; padding:6px;">SPO/FPOと同じ</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Patrol Specialist</td><td style="border:1px solid #a2a9b1; padding:6px;">200ポイント + 1ヶ月 + LPO + NMPCOM選抜</td><td style="border:1px solid #a2a9b1; padding:6px;">下げたゴーグル、濃紺バラクラバ、SPCアームパッド、ラジオパック</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Patrol Corporal</td><td style="border:1px solid #a2a9b1; padding:6px;">Junior NCO申請通過</td><td style="border:1px solid #a2a9b1; padding:6px;">濃紺ベレー、コンパクトヘッドセット</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Patrol Sergeant</td><td style="border:1px solid #a2a9b1; padding:6px;">Junior Leadershipプログラム通過</td><td style="border:1px solid #a2a9b1; padding:6px;">SGTアームバンド、異なるポーチ配置</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Staff Sergeant</td><td style="border:1px solid #a2a9b1; padding:6px;">Lieutenant+による選抜</td><td style="border:1px solid #a2a9b1; padding:6px;">PSGと同じ + アビエーター</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Master Sergeant</td><td style="border:1px solid #a2a9b1; padding:6px;">Lieutenant+による選抜</td><td style="border:1px solid #a2a9b1; padding:6px;">Staff Sergeantと同じ</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Lieutenant</td><td style="border:1px solid #a2a9b1; padding:6px;">Chief of Police+による選抜</td><td style="border:1px solid #a2a9b1; padding:6px;">MPCOMアームバンド、黒ブーニー、スリムベスト、ALICE黒セット</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Captain</td><td style="border:1px solid #a2a9b1; padding:6px;">Chief of Police+による選抜</td><td style="border:1px solid #a2a9b1; padding:6px;">任意のアクセサリー着用可</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Major</td><td style="border:1px solid #a2a9b1; padding:6px;">Chief of Police+による選抜</td><td style="border:1px solid #a2a9b1; padding:6px;">制服なし・任意アクセサリー</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Chief of Police</td><td style="border:1px solid #a2a9b1; padding:6px;">コミッショナーによる選抜</td><td style="border:1px solid #a2a9b1; padding:6px;">制服なし・任意アクセサリー</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Deputy Commissioner</td><td style="border:1px solid #a2a9b1; padding:6px;">コミッショナーによる選抜</td><td style="border:1px solid #a2a9b1; padding:6px;">任意アクセサリー</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Commissioner</td><td style="border:1px solid #a2a9b1; padding:6px;">現コミッショナー：Guma05_pl</td><td style="border:1px solid #a2a9b1; padding:6px;">制服なし・任意アクセサリー</td></tr>
+  </table>
+
+  <h2>専用ツール</h2>
+  <ul>
+    <li><strong>Handcuffs</strong>：指名手配者を逮捕（Eキー）。Pキーで赤点ハイライト。制限：頭上に赤い「ARREST」タグがある者のみ。</li>
+    <li><strong>Taser</strong>：指名手配者を無力化。車両内は一人称で胴体を狙う。制限：指名手配者のみ。乱用（stimming）は警告対象。</li>
+    <li><strong>Warning Clipboard</strong>：違反者に警告（2回で逮捕対象）。制限：ハンドブック記載の違反行為のみ。Plant DirectorやShift Managerの解雇ツール使用には警告不可。</li>
+    <li><strong>Authorize Clipboard</strong>：民間人の認可・認可解除。制限：民間人のみ。認可解除はNMPチーム内のみ。</li>
+    <li><strong>Vehicle Deleter</strong>：道路を塞ぐ・グリッチ車両を削除。制限：通行を妨げる車両のみ。</li>
+    <li><strong>Hazmat Suit</strong>：高放射線区域での警告・逮捕用。制限：メルトダウン時の高放射線区域で活発な違反者や指名手配者がいる場合のみ。</li>
+  </ul>
+
+  <h2>具体的な運用ルール</h2>
+  <h3>警告システム</h3>
+  <ul>
+    <li>2回の警告で逮捕対象となる。さらなる警告は刑期を延長。</li>
+    <li>警告カウントはゲーム退出でリセット。</li>
+    <li>過度に厳しくしないこと。軽微な初回違反は口頭警告を優先。</li>
+    <li>同一種類の違反が短時間に複数あっても、接触前は1回の警告にまとめる（深刻な場合を除く）。</li>
+    <li>警告直後に同じ違反を続けた場合は連続で警告可能。</li>
+    <li>敵対チームや囚人には基本使用不可（民間人のグリッチ・不適切言動などは可）。</li>
+  </ul>
+  <h3>主な警告対象行為</h3>
+  <ul>
+    <li><strong>Obstruction（妨害）</strong>：意図的なゲーム妨害（原子炉破壊、コントロールブロック、民間人への無差別射撃など）。武器stimmingは原則除外。</li>
+    <li><strong>Spawn-Killing</strong>：WN/BFOがスポーンから出るのを阻止する行為。単純な視線は該当しない。</li>
+    <li>Griefing、不適切な言語・行動、Spawncampingなど。</li>
+  </ul>
+  <h3>その他の運用原則</h3>
+  <ul>
+    <li>権限はゲーム内ルールを積極的に違反している者に対してのみ使用。</li>
+    <li>NMPはモデレーターではなく、NAMSと同等の権限を持たない。</li>
+    <li>Plant Directorの解雇ツール使用に干渉しない。</li>
+    <li>高放射線区域以外でのHazmat Suit着用は原則禁止（違反者確認時を除く）。</li>
+    <li>イベント中はホストの指示に従う（ゲームルールに反しない範囲）。</li>
+  </ul>
+  <div class="note">詳細な警告種類やハンドブックは公式Trello（https://trello.com/b/33jzcI1J/nmp-public-handbook）およびConduct Codexを参照。</div>
+
+  <h2>カデットアカデミー</h2>
+  <ol>
+    <li><strong>PHASE 1: ORIENTATION</strong> — ルール、ツール、イベント、階級の基礎教育。何度でも参加可。</li>
+    <li><strong>PHASE 2: UNIT PATROLS & SHADOW PATROLS</strong> — Unit Patrol 3回 + Shadow Patrol 1回（フィールド経験）。</li>
+    <li><strong>PHASE 3: FINAL EXAM</strong> — 30分1回のみ。失敗すると次回申請まで再挑戦不可。合格でJunior Patrol Officerに昇格。</li>
+  </ol>
+  <div class="note">Patrol Cadetはオリエンテーション通過後のみUnit/Shadow Patrol参加可能。自由にチーム参加不可。</div>
+
+  <h2>ポイントシステム</h2>
+  <ul>
+    <li>Solo Patrol：30分あたり1ポイント（1日最大4）</li>
+    <li>Unit Patrol：3ポイント</li>
+    <li>Shift Guarding：2ポイント</li>
+    <li>OT Guarding：1ポイント</li>
+    <li>Combat Training：2ポイント</li>
+    <li>Game Night：1ポイント</li>
+    <li>Joint Event：5ポイント</li>
+    <li>Other Events：2ポイント</li>
+  </ul>
+  <p>Patrol Specialist以下にはクォータなし。</p>
+
+  <h2>部門</h2>
+  <div class="faction-card">
+    <h3>Honor Guard (HG)</h3>
+    <p>儀礼的サブディビジョン。重要イベント警備とプロパガンダ作成。最高水準の規律が求められる。</p>
+  </div>
+  <div class="faction-card">
+    <h3>4th Motorized Response Unit (4MRU)</h3>
+    <p>最高の複合戦サブディビジョン。道路・高速道路の脅威対応。</p>
+  </div>
+  <div class="faction-card">
+    <h3>Quartermaster Corps (QMC)</h3>
+    <p>内部開発グループ。ゲーム・衣服・アートなど制作。外部受け入れ可。</p>
+  </div>
+  <div class="faction-card">
+    <h3>Counter Assault Team (CAT)</h3>
+    <p>対テロ・暴動対応最高部隊。Platoon 1 "Mako" / Platoon 2 "Hellhound" から選抜。</p>
+  </div>
+  <p><strong>関連リンク：</strong> Discord: https://discord.gg/noobicmp　／　Handbook: https://trello.com/b/33jzcI1J/nmp-public-handbook</p>
+</div>
+
+<!-- NES -->
+<div id="nes" class="section">
+  <h1>NES（Noobic Engineering Service / ヌービック工学サービス）</h1>
+  <p>プラントメンテナンス、メンテナンス作業員、修理工のグループ。NNPPを最高水準で維持する。ゾーンB（メンテナンス）および外部変圧器・通信ボックスを担当。モットーは「Safety, Service, Repair.」。現在の工学議長はMelaniePantoja。</p>
+  <p>加入にはオープンノートのオリエンテーションと試験、バックグラウンドチェックの通過が必要。合格後、White Hardhat (stripe)、(NES) PM Hi Vis、ID Lanyard、NES IDが付与される。Technical Engineer以上で発電機オフ権限を得る。</p>
+
+  <h2>ポイントシステム</h2>
+  <ul>
+    <li>通常シフト：+3</li>
+    <li>合同シフト：+4</li>
+    <li>ゲームナイト：+2</li>
+    <li>セレモニー（3人以上）：追加ポイント</li>
+    <li>アワード獲得：+3</li>
+    <li>HR+からの贈与も可能</li>
+  </ul>
+
+  <h2>階級</h2>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:0.95em;">
+    <tr style="background:#eaecf0;"><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">階級</th><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">カテゴリ</th><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">要件</th></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Engineering Intern (EI)</td><td style="border:1px solid #a2a9b1; padding:6px;">LR</td><td style="border:1px solid #a2a9b1; padding:6px;">オリエンテーション・BGC通過</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Junior Engineer (JE)</td><td style="border:1px solid #a2a9b1; padding:6px;">LR</td><td style="border:1px solid #a2a9b1; padding:6px;">30ポイント + Engineering Qualification</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Engineer (E)</td><td style="border:1px solid #a2a9b1; padding:6px;">LR</td><td style="border:1px solid #a2a9b1; padding:6px;">60ポイント + 4アワード</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Technical Engineer (TE)</td><td style="border:1px solid #a2a9b1; padding:6px;">LR</td><td style="border:1px solid #a2a9b1; padding:6px;">100ポイント + 5アワード</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Senior Engineer (SE)</td><td style="border:1px solid #a2a9b1; padding:6px;">LR</td><td style="border:1px solid #a2a9b1; padding:6px;">160ポイント + 6アワード</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Specialist Engineer (SPCE)</td><td style="border:1px solid #a2a9b1; padding:6px;">LR</td><td style="border:1px solid #a2a9b1; padding:6px;">MR+による選抜・推薦</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Staff Engineering Intern (SEI)</td><td style="border:1px solid #a2a9b1; padding:6px;">LR</td><td style="border:1px solid #a2a9b1; padding:6px;">MR申請通過後選抜</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Staff Engineer (STE)</td><td style="border:1px solid #a2a9b1; padding:6px;">MR</td><td style="border:1px solid #a2a9b1; padding:6px;">SEIプロベーション通過</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Senior Staff Engineer (SSE)</td><td style="border:1px solid #a2a9b1; padding:6px;">MR</td><td style="border:1px solid #a2a9b1; padding:6px;">ホスト資格 + 200ポイント程度</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Staff Engineering Supervisor (SES)</td><td style="border:1px solid #a2a9b1; padding:6px;">MR</td><td style="border:1px solid #a2a9b1; padding:6px;">300ポイント程度で適格と判断</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Staff Engineering Officer (SEO)</td><td style="border:1px solid #a2a9b1; padding:6px;">HR</td><td style="border:1px solid #a2a9b1; padding:6px;">MRからHR多数決で選抜 + トライアル</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Senior Engineering Officer (SREO)</td><td style="border:1px solid #a2a9b1; padding:6px;">HR</td><td style="border:1px solid #a2a9b1; padding:6px;">CEO・HC多数決で昇進</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Chief Engineering Officer (CEO)</td><td style="border:1px solid #a2a9b1; padding:6px;">HR</td><td style="border:1px solid #a2a9b1; padding:6px;">HCによる選抜（現：DragostErchus）</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Engineering Executives (ExE)</td><td style="border:1px solid #a2a9b1; padding:6px;">HC</td><td style="border:1px solid #a2a9b1; padding:6px;">HCによる選抜</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Engineering Secretary (ES)</td><td style="border:1px solid #a2a9b1; padding:6px;">HC</td><td style="border:1px solid #a2a9b1; padding:6px;">ECによる選抜</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Engineering Chairwoman (EC)</td><td style="border:1px solid #a2a9b1; padding:6px;">HC</td><td style="border:1px solid #a2a9b1; padding:6px;">NESリーダー（現：MelaniePantoja）</td></tr>
+  </table>
+
+  <h2>主要部門</h2>
+  <div class="faction-card">
+    <h3>Development and Creations (D&C)</h3>
+    <p>アセット作成部門。Uniform Administration (UA) をサブ部門に持つ。開発チームと品質保証チーム。</p>
+  </div>
+  <div class="faction-card">
+    <h3>Orientation & Training Board (OTB)</h3>
+    <p>オリエンテーションの指導・試験を担当。MR+向けプロベーションインストラクター制度あり。</p>
+  </div>
+  <div class="faction-card">
+    <h3>External Affairs (EA)</h3>
+    <p>他ファクションとの関係維持・合同イベント企画。MR+専用。</p>
+  </div>
+  <div class="faction-card">
+    <h3>NES Special Operations (NESSO)</h3>
+    <p>NES人員を敵対接触から防衛する専門部隊。厳格なトライアウトで選抜。</p>
+  </div>
+  <div class="faction-card">
+    <h3>Media & Outreach (M&O)</h3>
+    <p>アート・ポスター・プロパガンダ担当。Media TeamとPropaganda Teamが統合。</p>
+  </div>
+  <div class="faction-card">
+    <h3>Workforce Recruitment (WR)</h3>
+    <p>採用部門。施設内で候補者を募集。</p>
+  </div>
+  <div class="faction-card">
+    <h3>Writer's Guild (WG)</h3>
+    <p>ロア・ストーリー作成。Office of Records (OoR) をサブ部門に持つ。</p>
+  </div>
+  <div class="faction-card">
+    <h3>NES Car Force (NESCF)</h3>
+    <p>楽しむための部門。車好きが参加。レーストライアウトで選抜。</p>
+  </div>
+  <p><strong>関連リンク：</strong> Discord: https://discord.gg/nes</p>
+</div>
+
+<!-- ANRO -->
+<div id="anro" class="section">
+  <h1>ANRO（Advanced Noobic Reactor Operations / 高度ヌービック原子炉運用）</h1>
+  <p>ナラモの迫り来る核の冬を遅らせるために訓練された原子炉運用者のグループ。エネルギー省の請負業者。日常の原子炉オペレーターとは異なるカスタム制服を着用。現在のChief Nuclear OfficerはJuuzoIsAGoat。</p>
+  <p>加入にはオリエンテーション（原子炉関連の説明）とノートを使った試験、バックグラウンドチェックが必要。通常1日1回、定員50名程度で開催（人員不足で遅延あり）。</p>
+
+  <h2>ポイントシステム</h2>
+  <ul>
+    <li>認定試験参加</li>
+    <li>シフト参加</li>
+    <li>ゲームナイト参加</li>
+    <li>その他イベント</li>
+  </ul>
+  <p>詳細なポイント配分は公式Discord参照。</p>
+
+  <h2>階級</h2>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:0.95em;">
+    <tr style="background:#eaecf0;"><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">階級</th><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">カテゴリ</th><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">要件</th></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Junior Reactor Operator (JRO)</td><td style="border:1px solid #a2a9b1; padding:6px;">LR</td><td style="border:1px solid #a2a9b1; padding:6px;">オリエンテーション・BGC通過</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Reactor Operator (RO)</td><td style="border:1px solid #a2a9b1; padding:6px;">LR</td><td style="border:1px solid #a2a9b1; padding:6px;">Turbine & Solo Certification + 50ポイント + 5シフト</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Senior Reactor Operator (SRO)</td><td style="border:1px solid #a2a9b1; padding:6px;">LR</td><td style="border:1px solid #a2a9b1; padding:6px;">Emergency & Grid Certification + 125ポイント + 15シフト</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Shift Technical Advisor (STA)</td><td style="border:1px solid #a2a9b1; padding:6px;">LR</td><td style="border:1px solid #a2a9b1; padding:6px;">Supervisor Certification + 200ポイント + 25シフト</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Shift Supervisor (SU)</td><td style="border:1px solid #a2a9b1; padding:6px;">MR</td><td style="border:1px solid #a2a9b1; padding:6px;">MR申請・プロベーション通過 + 275-300ポイント + 30シフトなど</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Control Room Supervisor (CRS)</td><td style="border:1px solid #a2a9b1; padding:6px;">MR</td><td style="border:1px solid #a2a9b1; padding:6px;">SUを2週間 + 部門ランク1週間 + 選抜</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Field Operations Inspector (FOI)</td><td style="border:1px solid #a2a9b1; padding:6px;">MR</td><td style="border:1px solid #a2a9b1; padding:6px;">任意部門のオフィサーランク + 選抜</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Command Staff (CS)</td><td style="border:1px solid #a2a9b1; padding:6px;">HR</td><td style="border:1px solid #a2a9b1; padding:6px;">HR申請通過 + 選抜</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Section Chief (SC)</td><td style="border:1px solid #a2a9b1; padding:6px;">HR</td><td style="border:1px solid #a2a9b1; padding:6px;">SLによる選抜</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Deputy Director of Operations (DDoO)</td><td style="border:1px solid #a2a9b1; padding:6px;">SL</td><td style="border:1px solid #a2a9b1; padding:6px;">CNO / DoOによる選抜</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Director of Operations (DoO)</td><td style="border:1px solid #a2a9b1; padding:6px;">SL</td><td style="border:1px solid #a2a9b1; padding:6px;">CNOによる選抜</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Chief Nuclear Officer (CNO)</td><td style="border:1px solid #a2a9b1; padding:6px;">SL</td><td style="border:1px solid #a2a9b1; padding:6px;">辞任CNOから継承（現：JuuzoIsAGoat）</td></tr>
+  </table>
+
+  <h2>主要認定（Certifications）</h2>
+  <div class="faction-card">
+    <h3>Solo Certification</h3>
+    <p>パワーオーダーを5分以内に3回実行。ホストがsabotageを仕掛ける場合あり。</p>
+  </div>
+  <div class="faction-card">
+    <h3>Turbine Certification</h3>
+    <p>2分以内にタービンを1回同期。最大5試行。</p>
+  </div>
+  <div class="faction-card">
+    <h3>Emergency Certification</h3>
+    <p>Phase 1: 学習 → Phase 2: 訓練 → Phase 3: 試験。</p>
+  </div>
+  <div class="faction-card">
+    <h3>Grid Certification</h3>
+    <p>Emergencyと同様の3フェーズ構成。</p>
+  </div>
+  <div class="faction-card">
+    <h3>Supervisor Certification</h3>
+    <p>一定のシフト・ポイント・共同ホスト経験を満たした後のクローズドブック試験。</p>
+  </div>
+
+  <h2>主要部門</h2>
+  <div class="faction-card">
+    <h3>Training and Qualification (TQUAL)</h3>
+    <p>訓練部門。プロベーション通過後、独自にトレーニング・認定を開催可能。</p>
+  </div>
+  <div class="faction-card">
+    <h3>ANRO Honor Guard (ANROHG)</h3>
+    <p>Community Engagement配下。月次検査とオリエンテーション警備。トライアウト制。</p>
+  </div>
+  <div class="faction-card">
+    <h3>Community Engagement & External Affairs (CE&EA)</h3>
+    <p>ANROSOC、ANRORS、ANCA、ANROHGなどを含む。</p>
+  </div>
+  <div class="faction-card">
+    <h3>ANROCOM</h3>
+    <p>最高指揮層。他ファクションとの協力やロアイベント認可を行う。</p>
+  </div>
+  <p><strong>関連リンク：</strong> Discord: https://discord.gg/anro</p>
+</div>
+
+<!-- 2NIA -->
+<div id="2nia" class="section">
+  <h1>2NIA（2nd Noobic Intelligence Agency / 第2ヌービック情報機関）</h1>
+  <div class="note">開発者・特定のモデレーター中心のstimmingチーム。求められる技術が非常に高く、通常の申請経路ではほぼ加入できない。</div>
+  <p>ヌービア軍事政権の諜報部門。西ヌービアなどの敵対国家から情報を収集する任務を持つ。秘密性が高く、詳細はほとんど知られていない。モットーは「ut notitias」（情報を得る・集めるの意とされる）。</p>
+  <p>内務サービス人員の一部。ゲーム内では主にロールプレイ用とされ、他の戦闘チームでは対応できない特別な機能はほとんどない。8NEC経由でのみアクセス可能。</p>
+
+  <h2>階級（公開されている範囲）</h2>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:0.95em;">
+    <tr style="background:#eaecf0;"><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">階級</th><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">要件・備考</th></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Recruit</td><td style="border:1px solid #a2a9b1; padding:6px;">NAMS Team Lead+による一時チーム化</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Operative</td><td style="border:1px solid #a2a9b1; padding:6px;">2NIAメンバー（恒久アクセス）</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Senior Operative</td><td style="border:1px solid #a2a9b1; padding:6px;">シニアメンバー</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Field Agent</td><td style="border:1px solid #a2a9b1; padding:6px;">NAMS Game Moderators</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Sector Chief</td><td style="border:1px solid #a2a9b1; padding:6px;">NAMS Team Leaders（一時チーム化権限あり）</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Operations Supervisor</td><td style="border:1px solid #a2a9b1; padding:6px;">NAMS Head Moderator+</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Agency Director</td><td style="border:1px solid #a2a9b1; padding:6px;">おそらくBlaley（恒久チーム化権限）</td></tr>
+  </table>
+
+  <h2>サブチーム</h2>
+  <ul>
+    <li>2NIA Crisis Response Team</li>
+    <li>Asset Recovery Team</li>
+  </ul>
+  <p>外見：戦闘形態はライオットヘルメット＋黒服＋ベスト。フィールドオペレーションはバラクラバ＋ヘルメットなど。Sector Chiefは専用外見あり。</p>
+  <p>ツール：Federal Governmentと同等（Detain、View、Warn、Vehicle Deleterなど）＋開発者武器。名前はプレイヤーリストで伏せられる（PERSEC）。</p>
+</div>
+
+<!-- CSP -->
+<div id="csp" class="section">
+  <h1>CSP / 8NEC（Civil Service Personnel / 第8ヌービック工学軍団）</h1>
+  <div class="note">ゲーム開発者・貢献者向け。高いスキルと申請通過が必要で、合格率は極めて低い。</div>
+  <p>軍事政権の民生サービス（文民政府部門）に所属。警察・災害救援・官僚などさまざまな内部組織を含む。ゲーム内では主に8NEC（第8ヌービック工学軍団）のメンバーが該当し、スクリプティング・ビルディング・アニメーションなどの開発を担当する。</p>
+  <p>「プラント自体の設計を担当する工学軍団のメンバー」というゲーム説明あり。</p>
+
+  <h2>階級</h2>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:0.95em;">
+    <tr style="background:#eaecf0;"><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">階級</th><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">説明</th></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Quality Assurance</td><td style="border:1px solid #a2a9b1; padding:6px;">公開前にバグをテスト。CSPチームではなくNSPチームを与えられる</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Probationary Contributor</td><td style="border:1px solid #a2a9b1; padding:6px;">8NEC申請通過。これ以降CSPチームアクセス</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Contributor</td><td style="border:1px solid #a2a9b1; padding:6px;">プロベーション通過</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Senior Contributor</td><td style="border:1px solid #a2a9b1; padding:6px;">経験者</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Lead Contributor</td><td style="border:1px solid #a2a9b1; padding:6px;">長期在籍者</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Developer</td><td style="border:1px solid #a2a9b1; padding:6px;">Studio直接アクセス</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Senior Developer</td><td style="border:1px solid #a2a9b1; padding:6px;">コミュニティ対応も担当</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Team Leader</td><td style="border:1px solid #a2a9b1; padding:6px;">特定部門のリーダー</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Head Developer</td><td style="border:1px solid #a2a9b1; padding:6px;">開発部門全体を統括</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Creative Director</td><td style="border:1px solid #a2a9b1; padding:6px;">ゲーム開発統括（現オーナー：Blaley）</td></tr>
+  </table>
+
+  <h2>部門</h2>
+  <ul>
+    <li><strong>Building</strong>：構造・マップ・環境作成</li>
+    <li><strong>Modeling</strong>：Blenderで3Dアセット作成（必須）</li>
+    <li><strong>Scripting</strong>：Luauでのゲームロジック</li>
+    <li><strong>Graphics (UI/VFXなど)</strong>：視覚効果・UI</li>
+    <li><strong>Animation</strong>：Blenderでアニメーション</li>
+    <li><strong>Composer</strong>：音楽・効果音</li>
+  </ul>
+</div>
+
+<!-- NSP -->
+<div id="nsp" class="section">
+  <h1>NSP（Naval Service Personnel / 海軍サービス人員）</h1>
+  <div class="note">現在はQuality Assurance関連が中心。以前より制限が強く、通常の申請経路での加入は困難。</div>
+  <p>軍事政権の海軍サービス。第1艦隊の一部が港の海軍施設に駐屯し、海軍航空隊と少数の海兵が支援。東ヌービア側の連邦海上防衛軍に相当する。</p>
+  <p>任務：プラントへの進入ポイント警備、GSPやPlant Securityの施設防衛支援。LVT（揚陸車両）を装備し、チョークポイント防衛に優れる。</p>
+
+  <h2>現在の階級（QA関連）</h2>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:0.95em;">
+    <tr style="background:#eaecf0;"><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">階級</th><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">要件</th><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">装備例</th></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">1st Naval Fleet, Seabee</td><td style="border:1px solid #a2a9b1; padding:6px;">QA Tester</td><td style="border:1px solid #a2a9b1; padding:6px;">黄ヘルメット、LVT-A1、LVTなど</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Senior Seabee</td><td style="border:1px solid #a2a9b1; padding:6px;">QA Senior Tester</td><td style="border:1px solid #a2a9b1; padding:6px;">赤ヘルメット</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Seabee Supervisor</td><td style="border:1px solid #a2a9b1; padding:6px;">QA Supervisor</td><td style="border:1px solid #a2a9b1; padding:6px;">青ヘルメット</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Seabee Manager</td><td style="border:1px solid #a2a9b1; padding:6px;">8NEC Developer+（QA担当）</td><td style="border:1px solid #a2a9b1; padding:6px;">自身のRobloxアウトフィット</td></tr>
+  </table>
+
+  <h2>過去のサブファクション（現在Naramoでは非活動）</h2>
+  <ul>
+    <li>1st Noobic Fleet (1NF)</li>
+    <li>Noobic Naval Aerial Corps (NNAC)</li>
+    <li>Noobic Marine Corps (NMC) およびサブユニット（MERU、MIRAなど）</li>
+    <li>Noobic Marine Special Warfare Operations (NMSWO)</li>
+    <li>Noobic Naval Special Operations Brigade (NNSOB)</li>
+  </ul>
+</div>
+
+<!-- Federal Government -->
+<div id="fedgov" class="section">
+  <h1>Federal Government（NAMS / 連邦政府）</h1>
+  <div class="note">NAMS（Naramo Administration and Moderation Services）モデレーター向け。高い信頼性と経験が求められる。</div>
+  <p>ゲーム説明：「原子力発電所の全運用を監督するためにフルアクセスを与えられた政府査察官」。</p>
+  <p>NAMSモデレーターはエクスプロイター・アビューザーなどの違反者を扱い、ゲームとDiscordの両方でコミュニティの安全を維持する。元々は軍事政権の高位者用だったが、分離後にNAMS用に転用された。</p>
+
+  <h2>階級</h2>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:0.95em;">
+    <tr style="background:#eaecf0;"><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">階級</th><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">説明</th></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Faction Management</td><td style="border:1px solid #a2a9b1; padding:6px;">Faction Oversight。通常のモデ業務ではなく公式派閥の管理・助言。NOSHAチームアクセスあり</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Probationary Moderator</td><td style="border:1px solid #a2a9b1; padding:6px;">FIC取得中。チームアクセスありだがadminコマンドなし</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Junior Moderator</td><td style="border:1px solid #a2a9b1; padding:6px;">プロベーション終了後の新米モデレーター</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Game Moderators</td><td style="border:1px solid #a2a9b1; padding:6px;">認定済み。バン・modcall対応</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Senior Moderator</td><td style="border:1px solid #a2a9b1; padding:6px;">経験者。開発者・Team Lead支援</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Team Lead</td><td style="border:1px solid #a2a9b1; padding:6px;">モデ活動の監督</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Federal Government</td><td style="border:1px solid #a2a9b1; padding:6px;">8NEC Senior Developer+に付与</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Head of Operations</td><td style="border:1px solid #a2a9b1; padding:6px;">Head Moderator + 8NEC Head Developer</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Interior Commander</td><td style="border:1px solid #a2a9b1; padding:6px;">Blaley（オーナー）</td></tr>
+  </table>
+  <p>加入：NAMS Discordで必要時に申請フォームが配布される。</p>
+</div>
+
+<!-- NOSHA -->
+<div id="nosha" class="section">
+  <h1>NOSHA（Occupational Safety and Health Administration / 労働安全衛生管理局）</h1>
+  <div class="note">Moderation Team LeadとFaction Oversight中心のstimチーム。上位スタッフ向けで、通常の経路では加入困難。</div>
+  <p>ゲーム内で現在選択不可の専門チーム。特別なツールや武器はほとんどなく、M19 Suppressedと[RP]Briefcaseのみ。Aクリアランスを持ち、行政ビルのCorporateスポーンを使用。</p>
+  <p>現実のOSHA（米国の安全衛生規制機関）をモチーフにした、上位スタッフがゲームプレイに関与するためのユーモラスなチーム。</p>
+
+  <h2>階級</h2>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:0.95em;">
+    <tr style="background:#eaecf0;"><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">階級</th><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">要件</th><th style="border:1px solid #a2a9b1; padding:6px; text-align:left;">装備</th></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Safety Inspector</td><td style="border:1px solid #a2a9b1; padding:6px;">Moderation Team Lead</td><td style="border:1px solid #a2a9b1; padding:6px;">M19 Suppressed、[RP]Briefcase、Aカード</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:6px;">Compliance Inspector</td><td style="border:1px solid #a2a9b1; padding:6px;">Faction Oversight</td><td style="border:1px solid #a2a9b1; padding:6px;">同上</td></tr>
+  </table>
+</div>
+
+<!-- REGULAR TEAMS -->
+<div id="regular-teams" class="section">
+  <h1>通常チーム</h1>
+  <p>ゲーム開始時のチーム選択画面に表示される通常の役割です。一部はXPやGamepassで解放され、一部は最初から選択可能です。</p>
+  <p><strong>所属：</strong> Plant DefenseとDepartment of Energyは東ヌービア側。ExternalのうちWest Noobian Assault Force・Federal Maritime Defense Force・Federal Ranger Regimentは西ヌービア側。Bloxian Commonwealthと1SFAはブロクシア連邦側です。</p>
+  <p>各カードの「詳細を表示」ボタンを押すと、そのチームの詳細ページに移動します。</p>
+
+  <h2>Plant Defense（プラント防衛）<span style="font-size:0.7em; color:#c00; margin-left:8px;">東ヌービア側</span></h2>
+  <p>「敵対勢力からプラントを守る。」東ヌービア（軍事政権）側の防衛チーム。</p>
+
+  <div class="faction-card">
+    <h3 style="margin:0 0 8px 0; font-size:1.25em;">Plant Security</h3>
+    <p style="margin:4px 0 10px 0;">より強力な武器でプラントを警備するチーム。サブチームにDirector of Security Forcesがある。</p>
+    <button class="nav-btn" style="background:#eaf3ff; font-weight:600; padding:6px 12px;" onclick="showSection('plant-security')">詳細を表示 →</button>
+  </div>
+
+  <div class="faction-card">
+    <h3 style="margin:0 0 8px 0; font-size:1.25em;">Tactical Response Team</h3>
+    <p style="margin:4px 0 10px 0;">戦術対応部隊。サブ：Personal Security Detachment。</p>
+    <button class="nav-btn" style="background:#eaf3ff; font-weight:600; padding:6px 12px;" onclick="showSection('trt')">詳細を表示 →</button>
+  </div>
+
+  <div class="faction-card">
+    <h3 style="margin:0 0 8px 0; font-size:1.25em;">Ground Service Personnel</h3>
+    <p style="margin:4px 0 10px 0;">地上サービス人員。サブ：3rd Division Commander、345th Mechanised Battalion。</p>
+    <button class="nav-btn" style="background:#eaf3ff; font-weight:600; padding:6px 12px;" onclick="showSection('gsp')">詳細を表示 →</button>
+  </div>
+
+  <div class="faction-card">
+    <h3 style="margin:0 0 8px 0; font-size:1.25em;">Special Operation Command</h3>
+    <p style="margin:4px 0 10px 0;">特殊作戦司令部。</p>
+    <button class="nav-btn" style="background:#eaf3ff; font-weight:600; padding:6px 12px;" onclick="showSection('soc')">詳細を表示 →</button>
+  </div>
+
+  <div class="faction-card">
+    <h3 style="margin:0 0 8px 0; font-size:1.25em;">Local Military Police</h3>
+    <p style="margin:4px 0 10px 0;">地域軍事警察。</p>
+    <button class="nav-btn" style="background:#eaf3ff; font-weight:600; padding:6px 12px;" onclick="showSection('lmp')">詳細を表示 →</button>
+  </div>
+
+  <div class="faction-card">
+    <h3 style="margin:0 0 8px 0; font-size:1.25em;">Ground Service Field Medics</h3>
+    <p style="margin:4px 0 10px 0;">地上サービス野戦衛生兵。</p>
+    <button class="nav-btn" style="background:#eaf3ff; font-weight:600; padding:6px 12px;" onclick="showSection('gsfm')">詳細を表示 →</button>
+  </div>
+
+  <div class="faction-card">
+    <h3 style="margin:0 0 8px 0; font-size:1.25em;">13th Armoured Cavalry Regiment <span style="font-size:0.75em; color:#666;">[GAMEPASS]</span></h3>
+    <p style="margin:4px 0 10px 0;">第13装甲騎兵連隊。サブ：4th Noobic Support Battalion。</p>
+    <button class="nav-btn" style="background:#eaf3ff; font-weight:600; padding:6px 12px;" onclick="showSection('13acr')">詳細を表示 →</button>
+  </div>
+
+  <h2>Department of Energy（エネルギー省）<span style="font-size:0.7em; color:#c00; margin-left:8px;">東ヌービア側</span></h2>
+  <p>「プラントを維持し、原子炉を制御する。」東ヌービア（軍事政権）側の運営チーム。</p>
+
+  <div class="faction-card">
+    <h3 style="margin:0 0 8px 0; font-size:1.25em;">Plant Maintenance</h3>
+    <p style="margin:4px 0 10px 0;">プラントメンテナンス。サブにNESがある。</p>
+    <button class="nav-btn" style="background:#eaf3ff; font-weight:600; padding:6px 12px;" onclick="showSection('plant-maintenance')">詳細を表示 →</button>
+  </div>
+
+  <div class="faction-card">
+    <h3 style="margin:0 0 8px 0; font-size:1.25em;">Logistical Operations</h3>
+    <p style="margin:4px 0 10px 0;">後方支援。サブ：Chief Supply Officer、239th Sustainment Brigade。</p>
+    <button class="nav-btn" style="background:#eaf3ff; font-weight:600; padding:6px 12px;" onclick="showSection('logistics')">詳細を表示 →</button>
+  </div>
+
+  <div class="faction-card">
+    <h3 style="margin:0 0 8px 0; font-size:1.25em;">Reactor Operations</h3>
+    <p style="margin:4px 0 10px 0;">原子炉運用。サブにANROがある。</p>
+    <button class="nav-btn" style="background:#eaf3ff; font-weight:600; padding:6px 12px;" onclick="showSection('reactor-ops')">詳細を表示 →</button>
+  </div>
+
+  <div class="faction-card">
+    <h3 style="margin:0 0 8px 0; font-size:1.25em;">Plant Administration</h3>
+    <p style="margin:4px 0 10px 0;">Shift Manager、Corporate、Department of Energy Executive、Plant Directorなど。</p>
+    <button class="nav-btn" style="background:#eaf3ff; font-weight:600; padding:6px 12px;" onclick="showSection('plant-admin')">詳細を表示 →</button>
+  </div>
+
+  <h2>External（外部・敵対）<span style="font-size:0.7em; color:#00a; margin-left:8px;">主に西ヌービア側</span></h2>
+  <p>「発電所を攻撃・破壊工作する。」主に西ヌービア（連邦共和国）側のチーム。Bloxian Commonwealthとそのサブチーム（1SFA含む）はブロクシア連邦側。</p>
+
+  <div class="faction-card">
+    <h3 style="margin:0 0 8px 0; font-size:1.25em;">West Noobian Assault Force</h3>
+    <p style="margin:4px 0 10px 0;">西ヌービア強襲部隊。サブ：WN Major General、14th Field Reconnaissance Company。</p>
+    <button class="nav-btn" style="background:#eaf3ff; font-weight:600; padding:6px 12px;" onclick="showSection('wnaf')">詳細を表示 →</button>
+  </div>
+
+  <div class="faction-card">
+    <h3 style="margin:0 0 8px 0; font-size:1.25em;">Federal Maritime Defense Force <span style="font-size:0.75em; color:#666;">[GAMEPASS]</span></h3>
+    <p style="margin:4px 0 10px 0;">連邦海上防衛軍。</p>
+    <button class="nav-btn" style="background:#eaf3ff; font-weight:600; padding:6px 12px;" onclick="showSection('fmdf')">詳細を表示 →</button>
+  </div>
+
+  <div class="faction-card">
+    <h3 style="margin:0 0 8px 0; font-size:1.25em;">Federal Ranger Regiment <span style="font-size:0.75em; color:#666;">[GAMEPASS]</span></h3>
+    <p style="margin:4px 0 10px 0;">連邦レンジャー連隊。</p>
+    <button class="nav-btn" style="background:#eaf3ff; font-weight:600; padding:6px 12px;" onclick="showSection('frr')">詳細を表示 →</button>
+  </div>
+
+  <div class="faction-card">
+    <h3 style="margin:0 0 8px 0; font-size:1.25em;">Bloxian Commonwealth <span style="font-size:0.75em; color:#666;">[GAMEPASS]</span></h3>
+    <p style="margin:4px 0 10px 0;">ブロクシア連邦側のチーム。サブ：1st Support & Foreign Aid（1SFA）。</p>
+    <button class="nav-btn" style="background:#eaf3ff; font-weight:600; padding:6px 12px;" onclick="showSection('bloxia-team-game')">詳細を表示 →</button>
+  </div>
+
+  <div class="faction-card">
+    <h3 style="margin:0 0 8px 0; font-size:1.25em;">その他</h3>
+    <p style="margin:4px 0;">Civilians（民間人）、Incarcerated（収監者）</p>
+  </div>
+
+  <div class="note">公式派閥（NMP、NES、ANROなど）は上記カテゴリの「Other」に分類される場合が多いですが、詳細はそれぞれのセクションを参照してください。</div>
+</div>
+
+<!-- Individual Team Placeholders -->
+<div id="plant-security" class="section">
+  <h1>Plant Security（プラントセキュリティ）</h1>
+  <p>DoE Security Forces（SECFOR）はナラモ発電所のチェックポイント運用と内部警備を担当する。</p>
+  <p>スターターロールの1つ（Plant Maintenanceと並ぶ）。XP不要で解放。30,000 XPでTRT、50,000 XPでGSPを解放。Daily Rewardsで交通警察コスメあり。</p>
+
+  <h2>階級</h2>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:0.92em;">
+    <tr style="background:#eaecf0;"><th style="border:1px solid #a2a9b1; padding:5px;">階級</th><th style="border:1px solid #a2a9b1; padding:5px;">必要XP</th><th style="border:1px solid #a2a9b1; padding:5px;">主な装備・外見</th></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Junior Watchman</td><td style="border:1px solid #a2a9b1; padding:5px;">0</td><td style="border:1px solid #a2a9b1; padding:5px;">Weston SMG、M19。Hi Vis Vest、Junior Watchman shirtなど</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Watchman</td><td style="border:1px solid #a2a9b1; padding:5px;">3,000</td><td style="border:1px solid #a2a9b1; padding:5px;">CMP-44</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Probationary Guard</td><td style="border:1px solid #a2a9b1; padding:5px;">5,000</td><td style="border:1px solid #a2a9b1; padding:5px;">—</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Guard</td><td style="border:1px solid #a2a9b1; padding:5px;">7,000</td><td style="border:1px solid #a2a9b1; padding:5px;">T-42 Matchbox、Authorize</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Senior Guard</td><td style="border:1px solid #a2a9b1; padding:5px;">12,000</td><td style="border:1px solid #a2a9b1; padding:5px;">D-19 STAR、PAT-1。Tactical Rigなど</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Shift Assistant</td><td style="border:1px solid #a2a9b1; padding:5px;">25,000</td><td style="border:1px solid #a2a9b1; padding:5px;">DX-21。Utility cover、TRT Vest</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Shift Lead</td><td style="border:1px solid #a2a9b1; padding:5px;">50,000</td><td style="border:1px solid #a2a9b1; padding:5px;">C-11、Falkenkruez。Sunglasses、HRM Vest</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Security Sergeant</td><td style="border:1px solid #a2a9b1; padding:5px;">75,000</td><td style="border:1px solid #a2a9b1; padding:5px;">M-24、D-22 STAR。Black Beret</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Security First Sergeant</td><td style="border:1px solid #a2a9b1; padding:5px;">100,000</td><td style="border:1px solid #a2a9b1; padding:5px;">PN-1P Security Transport</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Security Lieutenant</td><td style="border:1px solid #a2a9b1; padding:5px;">150,000</td><td style="border:1px solid #a2a9b1; padding:5px;">Security Car (Reinforced)</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Security Captain</td><td style="border:1px solid #a2a9b1; padding:5px;">200,000</td><td style="border:1px solid #a2a9b1; padding:5px;">—</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Security Commander</td><td style="border:1px solid #a2a9b1; padding:5px;">300,000</td><td style="border:1px solid #a2a9b1; padding:5px;">A-Card、Retired Security Sedan</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Director Formals</td><td style="border:1px solid #a2a9b1; padding:5px;">600,000</td><td style="border:1px solid #a2a9b1; padding:5px;">Director of Security Forcesチームを解放</td></tr>
+  </table>
+  <p>民間人は武器を構えていない限り撃たず、Authorizeを試みる（5 XP）。敵車両が内部に入った場合はトンネル内の砲を使用。</p>
+  <p><button class="nav-btn" onclick="showSection('dsf')">→ Director of Security Forcesへ</button>　<button class="nav-btn" onclick="showSection('trt')">→ Tactical Response Teamへ</button></p>
+</div>
+<div id="dsf" class="section">
+  <h1>Director of Security Forces</h1>
+  <p>軍事政権の司令官に相当する階級を持ち、プラントとスタッフの安全を確保する直接的な権限を持つ。</p>
+  <p>Plant SecurityのPlant Executive。600,000 XPで解放（PSDは500,000 XPで別途解放可能）。サーバーあたりの制限あり。</p>
+  <h2>主な能力</h2>
+  <ul>
+    <li>Waypoints（rally / danger / defend / attack）をPlant Security全員に表示</li>
+    <li>Security Priority：特定場所を守ると追加XP</li>
+    <li>3ND Stockpile：チェックポイントにPAT-1を10個配置（15分CD）</li>
+    <li>Checkpoint Deployment：TRT5人をチェックポイントに即テレポート（20分CD）</li>
+    <li>Forward Supply Deployment：PS8人をナラモ市工場へ即テレポート</li>
+    <li>Team Announcement：Plant Security限定アナウンス</li>
+  </ul>
+  <p>外見：茶色のジャケット（下にガード制服が見える、星2つ）。</p>
+  <p><button class="nav-btn" onclick="showSection('plant-security')">← Plant Securityへ戻る</button></p>
+</div>
+<div id="trt" class="section">
+  <h1>Tactical Response Team（戦術対応部隊）</h1>
+  <p>通常のSECFORでは対処できない脅威や高リスク作戦を担当。Plant Directorの保護も行う。</p>
+  <p>Plant Securityで30,000 XP到達で解放。ICV-1 APCなどの優れた装備を持ち、主にPlant Directorとプラント内部・チェックポイントを警備。Plant Director周辺にいるとXPを得る。</p>
+
+  <h2>階級</h2>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:0.92em;">
+    <tr style="background:#eaecf0;"><th style="border:1px solid #a2a9b1; padding:5px;">階級</th><th style="border:1px solid #a2a9b1; padding:5px;">必要XP</th><th style="border:1px solid #a2a9b1; padding:5px;">主な装備</th></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Private</td><td style="border:1px solid #a2a9b1; padding:5px;">0</td><td style="border:1px solid #a2a9b1; padding:5px;">Weston SMG、CMP-44、T-42、DX-21、M19、Security Car、ICV-1 APC</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Corporal</td><td style="border:1px solid #a2a9b1; padding:5px;">3,000</td><td style="border:1px solid #a2a9b1; padding:5px;">Falkenkruez</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Sergeant</td><td style="border:1px solid #a2a9b1; padding:5px;">10,000</td><td style="border:1px solid #a2a9b1; padding:5px;">T-29 Springbolt、D-19 STAR</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Squad Leader</td><td style="border:1px solid #a2a9b1; padding:5px;">25,000</td><td style="border:1px solid #a2a9b1; padding:5px;">D-22 STAR</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Commander</td><td style="border:1px solid #a2a9b1; padding:5px;">100,000</td><td style="border:1px solid #a2a9b1; padding:5px;">PSAT、D-23 STAR、Tactical Response LLMV</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Special Response Team</td><td style="border:1px solid #a2a9b1; padding:5px;">600,000</td><td style="border:1px solid #a2a9b1; padding:5px;">TRT Blackouts Uniform</td></tr>
+  </table>
+  <p>1.5M XPでPersonal Security Detachment（PSD）を解放（Plant Securityで500k XPも必要）。Heavyクラスは使用不可。</p>
+  <p><button class="nav-btn" onclick="showSection('plant-security')">← Plant Securityへ戻る</button>　<button class="nav-btn" onclick="showSection('psd')">→ Personal Security Detachmentへ</button></p>
+</div>
+<div id="psd" class="section">
+  <h1>Personal Security Detachment</h1>
+  <p>Plant Directorを保護する精鋭護衛部隊。TRTの上位サブチームに相当する。</p>
+  <p>解放条件：TRTで1,500,000 XP + Plant Securityで500,000 XP。</p>
+  <p>通常のTRTより高度な護衛任務を担当し、Plant Director周辺での活動が重視される。</p>
+  <p><button class="nav-btn" onclick="showSection('trt')">← Tactical Response Teamへ戻る</button>　<button class="nav-btn" onclick="showSection('plant-security')">→ Plant Securityへ</button></p>
+</div>
+<div id="gsp" class="section">
+  <h1>Ground Service Personnel</h1>
+  <p>軍事政権の第3・第2ヌービック師団の最前線兵士。WNDFとブロクシアの存在後にナラモに配属された。</p>
+  <p>地上サービスは軍事政権の地上軍を代表する機関の一つ。ナラモでは原子力発電所の追加防衛部隊としてPlant Securityと協力する。Plant Securityで50,000 XP到達で解放。</p>
+  <h2>任務</h2>
+  <p>FOB MARENTから作戦を行い、プラントの外部警備とナラモ市全体の防衛を担当。内部警備はPlant Securityの責任。港の防衛も優先し、物流トラックの護衛でXPを得る。コンバティブ無線を使用すること。</p>
+  <p>XPはチェックポイントなどのサークル内待機、WNキル、港保持などで獲得。</p>
+  <h2>主な階級</h2>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:0.92em;">
+    <tr style="background:#eaecf0;"><th style="border:1px solid #a2a9b1; padding:5px;">階級</th><th style="border:1px solid #a2a9b1; padding:5px;">必要XP</th><th style="border:1px solid #a2a9b1; padding:5px;">主な装備</th></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">2nd Division, Enlisted</td><td style="border:1px solid #a2a9b1; padding:5px;">0</td><td style="border:1px solid #a2a9b1; padding:5px;">T-42、D-19 STAR、DA-21</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">2nd Division, Infantryman</td><td style="border:1px solid #a2a9b1; padding:5px;">2,000</td><td style="border:1px solid #a2a9b1; padding:5px;">DX-21、M41 Utility</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">2nd Division, Senior Inf.</td><td style="border:1px solid #a2a9b1; padding:5px;">5,000</td><td style="border:1px solid #a2a9b1; padding:5px;">PAT-1、LLUVなど</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">3rd Division, Infantryman</td><td style="border:1px solid #a2a9b1; padding:5px;">40,000</td><td style="border:1px solid #a2a9b1; padding:5px;">D-22 STAR</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">3rd Division, Senior Inf.</td><td style="border:1px solid #a2a9b1; padding:5px;">60,000</td><td style="border:1px solid #a2a9b1; padding:5px;">Falkenkruez、M-24</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">3rd Division, Corporal</td><td style="border:1px solid #a2a9b1; padding:5px;">100,000</td><td style="border:1px solid #a2a9b1; padding:5px;">Super Bazooka、C-16</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">3rd Division, Colonel</td><td style="border:1px solid #a2a9b1; padding:5px;">500,000</td><td style="border:1px solid #a2a9b1; padding:5px;">Model 17、GSP Commanderアクセス</td></tr>
+  </table>
+  <p><button class="nav-btn" onclick="showSection('13acr')">→ 13th ACRへ</button>　<button class="nav-btn" onclick="showSection('gsfm')">→ Field Medicsへ</button>　<button class="nav-btn" onclick="showSection('soc')">→ SOCへ</button>　<button class="nav-btn" onclick="showSection('3dc')">→ 3rd Division Commanderへ</button>　<button class="nav-btn" onclick="showSection('345mb')">→ 345th Mechanised Battalionへ</button></p>
+</div>
+<div id="3dc" class="section">
+  <h1>3rd Division Commander</h1>
+  <p>第3師団の司令官。地上サービスの上位指揮ポジション。</p>
+  <p>GSPの高ランク（特にColonel付近）からアクセス可能な指揮役。師団レベルの作戦指揮を担当する。</p>
+  <p><button class="nav-btn" onclick="showSection('gsp')">← Ground Service Personnelへ戻る</button></p>
+</div>
+<div id="345mb" class="section">
+  <h1>345th Mechanised Battalion</h1>
+  <p>第345機械化大隊。地上サービスの機械化歩兵ユニット。</p>
+  <p>装甲車両を活用した機動戦を得意とするサブユニット。過去の公式派閥時代から存在し、現在もGSPの一部として機能する。</p>
+  <p><button class="nav-btn" onclick="showSection('gsp')">← Ground Service Personnelへ戻る</button></p>
+</div>
+<div id="soc" class="section">
+  <h1>Special Operation Command</h1>
+  <p>特殊作戦司令部。地上サービスのサブユニットの一つ。</p>
+  <p>詳細な階級や装備情報は現在整備中ですが、300,000 XP到達で4NSB解放条件の一部を満たします。</p>
+  <p><button class="nav-btn" onclick="showSection('gsp')">← Ground Service Personnelへ戻る</button>　<button class="nav-btn" onclick="showSection('13acr')">→ 13th ACR / 4NSBへ</button></p>
+</div>
+<div id="lmp" class="section">
+  <h1>Local Military Police</h1>
+  <p>地域軍事警察。プラント周辺や市内の治安維持を担当し、民間人の認可や逮捕を行う。</p>
+  <p>Wanted状態のプレイヤーを逮捕してIncarceratedチームに送る。NMPと連携する場合もある。</p>
+  <p><button class="nav-btn" onclick="showSection('nmp')">→ NMPへ</button>　<button class="nav-btn" onclick="showSection('gsp')">← Ground Service Personnelへ</button></p>
+</div>
+<div id="gsfm" class="section">
+  <h1>Ground Service Field Medics（地上サービス野戦衛生兵）</h1>
+  <p>ノビス・ベルムで訓練されたGSFMは、侵攻中のナラモプラント全体の医療・回収任務を担当する。</p>
+  <p>Ground Serviceの医療部門。前線部隊への医療支援と兵士・PS・DOE職員・民間人の健康維持が任務。直接戦闘は期待されず、負傷者の治療に集中する。</p>
+
+  <h2>階級</h2>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:0.92em;">
+    <tr style="background:#eaecf0;"><th style="border:1px solid #a2a9b1; padding:5px;">階級</th><th style="border:1px solid #a2a9b1; padding:5px;">必要XP</th><th style="border:1px solid #a2a9b1; padding:5px;">主な変化</th></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Junior Corpsman</td><td style="border:1px solid #a2a9b1; padding:5px;">0</td><td style="border:1px solid #a2a9b1; padding:5px;">デフォルト</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Combat Medic</td><td style="border:1px solid #a2a9b1; padding:5px;">10,000</td><td style="border:1px solid #a2a9b1; padding:5px;">Medical combat helmet</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Senior Combat Medic</td><td style="border:1px solid #a2a9b1; padding:5px;">25,000</td><td style="border:1px solid #a2a9b1; padding:5px;">Ambulance（LLMV）解放</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Chief Combat Medic</td><td style="border:1px solid #a2a9b1; padding:5px;">50,000</td><td style="border:1px solid #a2a9b1; padding:5px;">—</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Field Surgeon</td><td style="border:1px solid #a2a9b1; padding:5px;">100,000</td><td style="border:1px solid #a2a9b1; padding:5px;">ポーチ・バックパック除去</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Casualty Care Chief</td><td style="border:1px solid #a2a9b1; padding:5px;">150,000</td><td style="border:1px solid #a2a9b1; padding:5px;">—</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Medical Officer</td><td style="border:1px solid #a2a9b1; padding:5px;">300,000</td><td style="border:1px solid #a2a9b1; padding:5px;">ベレー、マスク。MTV-M解放</td></tr>
+  </table>
+  <p>IFAKで味方の体力を回復。LLMV（25k XP）はストレッチャーで急速回復・失った肢体の復元。300k XPでMTV-M（4ストレッチャー、重装甲）。</p>
+  <p><button class="nav-btn" onclick="showSection('gsp')">← Ground Service Personnelへ戻る</button></p>
+</div>
+<div id="13acr" class="section">
+  <h1>13th Armored Cavalry Regiment</h1>
+  <p>第3師団の最精鋭偵察・歩兵から選抜された、侵略者に対するスクリーニング・偵察部隊。</p>
+  <p>地上サービスの主要偵察・軽装甲部隊。Gamepass限定。歩兵への火力支援と敵の動きの報告を行う。Bloxian Foreign Oversightの装甲に対抗するために導入された。</p>
+  <h2>主な階級</h2>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:0.92em;">
+    <tr style="background:#eaecf0;"><th style="border:1px solid #a2a9b1; padding:5px;">階級</th><th style="border:1px solid #a2a9b1; padding:5px;">必要XP</th><th style="border:1px solid #a2a9b1; padding:5px;">外見変化</th></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Junior Trooper</td><td style="border:1px solid #a2a9b1; padding:5px;">0</td><td style="border:1px solid #a2a9b1; padding:5px;">デフォルト</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Cavalry Scout</td><td style="border:1px solid #a2a9b1; padding:5px;">25,000</td><td style="border:1px solid #a2a9b1; padding:5px;">Helmet</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Senior Cavalry Scout</td><td style="border:1px solid #a2a9b1; padding:5px;">50,000</td><td style="border:1px solid #a2a9b1; padding:5px;">BUSHMASTERヘルメット</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Cavalry Lieutenant</td><td style="border:1px solid #a2a9b1; padding:5px;">300,000</td><td style="border:1px solid #a2a9b1; padding:5px;">VT-2E3 ACAV解放</td></tr>
+  </table>
+  <p>装備：Jericho SMG、複数のAT/HATスロット、Recon Jeeps、ICV-1、RCV-1、VT-2A1、VT-6など。</p>
+  <p>1,000,000 XP + SOC 300,000 XPで4th Noobic Support Battalion（4NSB）を解放。</p>
+  <p><button class="nav-btn" onclick="showSection('gsp')">← Ground Service Personnelへ戻る</button>　<button class="nav-btn" onclick="showSection('4nsb')">→ 4NSBへ</button>　<button class="nav-btn" onclick="showSection('soc')">→ SOCへ</button></p>
+</div>
+<div id="4nsb" class="section">
+  <h1>4th Noobic Support Battalion（4NSB）</h1>
+  <p>ロトラの戦いの後、西側の装甲矛先を撃退するために直接投入された精鋭部隊。</p>
+  <p>13th Armored Cavalry Regimentのサブチーム。独自のコスメと専用戦車VT-5E1を持つ。階級タイトルは「4NSB, Tanker」。</p>
+  <p>解放条件：13ACRで1,000,000 XP + SOCで300,000 XP。</p>
+  <p>外見：OD Tanker Standard、DH-132ヘルメット、ゴーグル、M25ガスマスク。武器：DA-21 Suppressed。</p>
+  <p><button class="nav-btn" onclick="showSection('13acr')">← 13th ACRへ戻る</button></p>
+</div>
+<div id="plant-maintenance" class="section">
+  <h1>Plant Maintenance（プラントメンテナンス）</h1>
+  <p>プラントの背骨。メンテナンススタッフがインフラを修理し、Logisticsが届ける物資を扱う。</p>
+  <p>Department of Energyの最初のチーム。ログイン直後から利用可能。施設全体の修理・維持が主な任務。サブチームにPlant Operations Chiefがある。</p>
+
+  <h2>主な修理対象</h2>
+  <ul>
+    <li>Feedwater（FW）</li>
+    <li>Generators（Gens）</li>
+    <li>Turbines（TB）</li>
+    <li>External Transformers（Ext）</li>
+    <li>Comms Box</li>
+    <li>Pipes（青色・黄色）</li>
+  </ul>
+
+  <h2>階級</h2>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:0.92em;">
+    <tr style="background:#eaecf0;"><th style="border:1px solid #a2a9b1; padding:5px;">階級</th><th style="border:1px solid #a2a9b1; padding:5px;">必要XP</th><th style="border:1px solid #a2a9b1; padding:5px;">主な外見</th></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Intern</td><td style="border:1px solid #a2a9b1; padding:5px;">0</td><td style="border:1px solid #a2a9b1; padding:5px;">Hat、PM Hi Vis Vest、Staff Jumpsuitなど</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Junior Technician</td><td style="border:1px solid #a2a9b1; padding:5px;">500</td><td style="border:1px solid #a2a9b1; padding:5px;">Earmuffs、White Hard Hatなど</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Technician</td><td style="border:1px solid #a2a9b1; padding:5px;">2,000</td><td style="border:1px solid #a2a9b1; padding:5px;">—</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Senior Technician</td><td style="border:1px solid #a2a9b1; padding:5px;">4,000</td><td style="border:1px solid #a2a9b1; padding:5px;">—</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Supervisor</td><td style="border:1px solid #a2a9b1; padding:5px;">7,500</td><td style="border:1px solid #a2a9b1; padding:5px;">Blue Coverall Shirtなど</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Head Technician</td><td style="border:1px solid #a2a9b1; padding:5px;">25,000</td><td style="border:1px solid #a2a9b1; padding:5px;">Red Hard Hat、B Lanyard</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Plant Operations Manager</td><td style="border:1px solid #a2a9b1; padding:5px;">100,000</td><td style="border:1px solid #a2a9b1; padding:5px;">Black Hard Hat、White Shirt & Tie。発電機オフ可能</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Maintenance Specialist</td><td style="border:1px solid #a2a9b1; padding:5px;">600,000</td><td style="border:1px solid #a2a9b1; padding:5px;">Plant Operations Chiefチームを解放</td></tr>
+  </table>
+  <p>PMが4人以下の場合、グリッド変更が自動で行われ、ROだけで燃料補給可能。5M XPで黄金のモップを解放。</p>
+  <p><button class="nav-btn" onclick="showSection('poc')">→ Plant Operations Chiefへ</button>　<button class="nav-btn" onclick="showSection('logistics')">→ Logistical Operationsへ</button></p>
+</div>
+<div id="poc" class="section">
+  <h1>Plant Operations Chief</h1>
+  <p>プラント内のすべてのメンテナンス運用を管理し、原子炉を最大効率で稼働させる。</p>
+  <p>Plant MaintenanceのPlant Executive。600,000 XPで解放、サーバーあたり1人。</p>
+  <p>優先タスク設定で該当作業に30% XPボーナス。Executive RadioでRepair/Operate/Maintain/Dangerマーカーを設置可能。</p>
+  <p>Acts：Unpaid Overtime、Renegotiated Budgetなど。</p>
+  <p><button class="nav-btn" onclick="showSection('plant-maintenance')">← Plant Maintenanceへ戻る</button></p>
+</div>
+<div id="logistics" class="section">
+  <h1>Logistical Operations（後方支援）</h1>
+  <p>プラントを時計のように動かし続ける。工場からプラントへ装甲輸送で物資を届ける。</p>
+  <p>DoEの3番目のチーム。Plant Maintenanceで4,000 XPまたはGamepassで解放。燃料キャニスター、Bloxy Cola、原子炉燃料棒の輸送・配布を担当。サブチームに239th Sustainment BrigadeとChief Supply Officerがある。</p>
+
+  <h2>階級</h2>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:0.92em;">
+    <tr style="background:#eaecf0;"><th style="border:1px solid #a2a9b1; padding:5px;">階級</th><th style="border:1px solid #a2a9b1; padding:5px;">必要XP</th><th style="border:1px solid #a2a9b1; padding:5px;">主な外見</th></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Intern</td><td style="border:1px solid #a2a9b1; padding:5px;">0</td><td style="border:1px solid #a2a9b1; padding:5px;">Orange Hardhat、Logistics Hi Visibility Vestなど</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Driver</td><td style="border:1px solid #a2a9b1; padding:5px;">1,000</td><td style="border:1px solid #a2a9b1; padding:5px;">Polo shirt and pants、Hat</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Supplier</td><td style="border:1px solid #a2a9b1; padding:5px;">3,000</td><td style="border:1px solid #a2a9b1; padding:5px;">—</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Experienced</td><td style="border:1px solid #a2a9b1; padding:5px;">7,500</td><td style="border:1px solid #a2a9b1; padding:5px;">—</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Manager</td><td style="border:1px solid #a2a9b1; padding:5px;">10,000</td><td style="border:1px solid #a2a9b1; padding:5px;">Red Hardhat、Orange Coverall、B-Keycard</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Assistant Supply Officer</td><td style="border:1px solid #a2a9b1; padding:5px;">50,000</td><td style="border:1px solid #a2a9b1; padding:5px;">White Shirt and Tie、A-Keycard</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Chief Supply Officer</td><td style="border:1px solid #a2a9b1; padding:5px;">600,000</td><td style="border:1px solid #a2a9b1; padding:5px;">Cowboy Hat、Sunglasses、Trucker Shirt</td></tr>
+  </table>
+  <p>Supply LLUVは非常に速く、一部の装甲車より高い耐久力（65 HP）を持つ。</p>
+</div>
+<div id="reactor-ops" class="section">
+  <h1>Reactor Operations</h1>
+  <p>原子炉運用。サブにANROがある。</p>
+  <div class="note">詳細は準備中です。</div>
+</div>
+<div id="plant-admin" class="section">
+  <h1>Plant Administration</h1>
+  <p>エネルギー省の管理系チーム群。Shift Manager、Corporate、Department of Energy Executive、Plant Directorを含む。</p>
+
+  <h2>Shift Manager</h2>
+  <p>原子炉運用を監督する管理職。一定XPで解放。緊急時のDA-21など特別な権限を持つ。</p>
+
+  <h2>Corporate</h2>
+  <p>プラント全体の監視、公開ツアー運営、ロックダウン権限を持つ。Plant Directorの補佐。30,000 XP（Shift Manager）またはGamepassで解放。</p>
+  <p>主な能力：Level 3ロックダウン、貨物列車呼び出し、カメラ確認、民間人の遠隔認可など。</p>
+  <p>600,000 XPでDepartment of Energy Executiveを解放（サーバーあたり1人）。</p>
+
+  <h2>Department of Energy Executive</h2>
+  <p>軍事政権の公式者として、Executive Actsを発動し、プラントのための軍資産を要請できる。CorporateのPlant Executive。</p>
+  <p>主なActs：Exigent Circumstances Act（非戦闘DoEにCMP-44付与）、Enhanced Security Act、Reinforced Supplies Actなど。</p>
+
+  <h2>Plant Director</h2>
+  <p>発電所の顔であり、NNPP内の全運用を統括。DoEの最終・最高ランク。サーバーあたり1人。Corporateで6,000 XPまたはGamepassで解放。</p>
+  <p>主な能力：Level 2ロックダウン、カメラスキャン、DoE/GSP従業員の解雇（5分間）、Corporate Meeting開催、全体アナウンスなど。</p>
+  <p>暗殺されると自動的に解雇される。NMPは解雇に対して免責。</p>
+
+  <p><button class="nav-btn" onclick="showSection('reactor-ops')">← Reactor Operationsへ</button>　<button class="nav-btn" onclick="showSection('plant-maintenance')">← Plant Maintenanceへ</button></p>
+</div>
+<div id="wnaf" class="section">
+  <h1>West Noobian Assault Force（西ヌービア強襲部隊）</h1>
+  <p>東ヌービア沿岸への破壊的な上陸後、WNSDFがナラモとその原子力発電所への攻撃を開始する。</p>
+  <p>西ヌービア連邦防衛軍の一師団。ナラモ地区沿岸への上陸後、ヌービア軍事政権の兵士と戦う。武器の解放に必要なXPはGSPやPlant Securityより少なく、車両の解放にはより多くのXPが必要。1st Support & Foreign Aidチームを得るための2チームの1つ。</p>
+
+  <h2>任務</h2>
+  <p>プラント運用を妨害し、核メルトダウンを引き起こすためにあらゆることを行う。ロジスティクスチームへの嫌がらせ、特定システムの無効化、コントロールルームの占拠による破壊工作など。任意任務としてPlant Directorの暗殺（非外部チームのシフト報酬を25%削減）や配管・監視カメラ・自販機の破壊など。</p>
+
+  <h2>階級</h2>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:0.92em;">
+    <tr style="background:#eaecf0;"><th style="border:1px solid #a2a9b1; padding:5px;">階級</th><th style="border:1px solid #a2a9b1; padding:5px;">必要XP</th><th style="border:1px solid #a2a9b1; padding:5px;">主な装備・外見</th></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Conscript</td><td style="border:1px solid #a2a9b1; padding:5px;">0</td><td style="border:1px solid #a2a9b1; padding:5px;">T-42 Matchbox、T-29 Springbolt、BR-10、B63、M19、PMVなど。WN PASGTヘルメット、Full Sleeve、West Noobian Pantsなど</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Operative</td><td style="border:1px solid #a2a9b1; padding:5px;">10,000</td><td style="border:1px solid #a2a9b1; padding:5px;">BR-18。Full Sleeve w/ Gloves</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Senior Operative</td><td style="border:1px solid #a2a9b1; padding:5px;">20,000</td><td style="border:1px solid #a2a9b1; padding:5px;">BR-7、PMV (T)。Goggles、Short Sleeveなど</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Field Sergeant</td><td style="border:1px solid #a2a9b1; padding:5px;">30,000</td><td style="border:1px solid #a2a9b1; padding:5px;">M41 Utility。GPAS Vest Woodlandなど</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Master Sergeant</td><td style="border:1px solid #a2a9b1; padding:5px;">50,000</td><td style="border:1px solid #a2a9b1; padding:5px;">C-16 GPMG。Flak Jacket、Gas Maskなど</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Warrant Officer</td><td style="border:1px solid #a2a9b1; padding:5px;">100,000</td><td style="border:1px solid #a2a9b1; padding:5px;">M52 APC "Garbage"。Officer Headsetなど</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Lieutenant</td><td style="border:1px solid #a2a9b1; padding:5px;">150,000</td><td style="border:1px solid #a2a9b1; padding:5px;">Short Sleeve w/ Gloves and Armor</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Captain</td><td style="border:1px solid #a2a9b1; padding:5px;">200,000</td><td style="border:1px solid #a2a9b1; padding:5px;">T-3、M53 CCS</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Detachment Commander</td><td style="border:1px solid #a2a9b1; padding:5px;">300,000</td><td style="border:1px solid #a2a9b1; padding:5px;">Model 17。Stubble、Detachment Commander Jacketなど</td></tr>
+    <tr><td style="border:1px solid #a2a9b1; padding:5px;">Major General</td><td style="border:1px solid #a2a9b1; padding:5px;">500,000</td><td style="border:1px solid #a2a9b1; padding:5px;">WN Major Generalチームを解放</td></tr>
+  </table>
+
+  <h2>主な行動</h2>
+  <p>WN本部にスポーン。赤い箱で車両を召喚し、Logistics Bypass、Checkpoint、Minefield、Subwayなどを使ってプラントに侵入。コントロールルーム占拠、発電機・冷却系無効化、給水ポンプ破壊などで混乱を引き起こす。</p>
+  <div class="note">Naramo V1では当初「Covert Operations」→「42nd Special Operations」など複数の名前を経て現在の名称になった。</div>
+</div>
+<div id="fmdf" class="section">
+  <h1>Federal Maritime Defense Force</h1>
+  <p>連邦海上防衛軍。[GAMEPASS]</p>
+  <div class="note">詳細は準備中です。</div>
+</div>
+<div id="frr" class="section">
+  <h1>Federal Ranger Regiment</h1>
+  <p>連邦レンジャー連隊。[GAMEPASS]</p>
+  <div class="note">詳細は準備中です。</div>
+</div>
+<div id="civilians" class="section">
+  <h1>Civilians</h1>
+  <p>近隣の町の民間人。プラント管理が許可すればプラントを見学できる。</p>
+  <p>シティホール前にスポーン。最もシンプルなチームで、主に街とプラントを探索する。施設への入場にはPlant SecurityやLMP/NMPの認可が必要（認可されると武器が除去される）。無認可で入場すると撃たれるか認可を求められる。</p>
+  <p>WNAFは攻撃できないが、施設人員は内外で攻撃可能。プラント人員を殺害すると警告を受け、2回目でWantedとなり逮捕される。</p>
+  <p><button class="nav-btn" onclick="showSection('incarcerated')">→ Incarceratedへ</button></p>
+</div>
+<div id="incarcerated" class="section">
+  <h1>Incarcerated</h1>
+  <p>逮捕されたプレイヤーが刑務所で刑期を過ごすチーム。刑期は1分〜15分。</p>
+  <p>Wanted状態でLMPまたはNMPに逮捕されるか、民間人スポーン近くのポリスボックスで自首する。自首すると刑期が50%減少。</p>
+  <p>警告を受ける行為：認可された民間人の殺害、民間人としての銃使用殺害、車両窃盗など。2回目でWanted（基本2:00、最大30:00）。</p>
+  <p>逮捕後はZone Dの刑務所にテレポートされ、時間経過後にCivilianに戻る。</p>
+  <p><button class="nav-btn" onclick="showSection('civilians')">← Civiliansへ戻る</button>　<button class="nav-btn" onclick="showSection('lmp')">→ LMPへ</button></p>
+</div>
+<div id="bloxia-team-game" class="section">
+  <h1>Bloxian Commonwealth</h1>
+  <p>ブロクシア連邦。[GAMEPASS] サブ：1st Support & Foreign Aid。</p>
+  <div class="note">詳細は準備中です。</div>
+  <p><button class="nav-btn" onclick="showSection('1sfa')">→ 1st Support & Foreign Aidへ</button></p>
+</div>
+<div id="1sfa" class="section">
+  <h1>1st Support & Foreign Aid（1SFA）</h1>
+  <p>名前に反して、ブロクシア訓練を受けた東ヌービア人によるブラックオペレーション部隊。プラントへの潜入・破壊を行う。</p>
+  <p>Bloxian Commonwealthで1,000,000 XP、かつWest Noobian Assault Forceで300,000 XP到達で解放される秘密サブチーム。BR-177S、Model 17、RL-7 Lynx、Advanced Hacking Deviceなどを装備。リーダーボードでは「?」マークが付き、ランクはOperator。</p>
+  <p>東ヌービア人設定のため、GSPや5NSOの偽装装備を使用可能。</p>
+  <p><button class="nav-btn" onclick="showSection('bloxia-team-game')">← Bloxian Commonwealthへ戻る</button>　<button class="nav-btn" onclick="showSection('wnaf')">→ West Noobian Assault Forceへ</button></p>
+</div>
+
+</div>
+
+<script>
+function toggleTeam(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  }
+  event.stopPropagation();
+}
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (target) {
+    target.classList.add('active');
+    document.getElementById('content').classList.remove('full-view');
+  }
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function showFull() {
+  document.querySelectorAll('.section').forEach(s => s.classList.add('active'));
+  document.getElementById('content').classList.add('full-view');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// 初期表示
+document.addEventListener('DOMContentLoaded', () => {
+  showSection('home');
+});
+</script>
+
+</body>
+</html>
